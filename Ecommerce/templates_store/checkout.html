@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from portotheme.com/html/wolmart/checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Apr 2022 07:17:33 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <title>Wolmart eCommmerce Marketplace HTML Template</title>
+
+    <meta name="keywords" content="Marketplace ecommerce responsive HTML5 Template" />
+    <meta name="description" content="Wolmart is powerful marketplace &amp; ecommerce responsive Html5 Template.">
+    <meta name="author" content="D-THEMES">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/icons/favicon.png">
+
+    <!-- WebFont.js -->
+    <script>
+        WebFontConfig = {
+            google: { families: ['Poppins:400,500,600,700'] }
+        };
+        ( function ( d ) {
+            var wf = d.createElement( 'script' ), s = d.scripts[0];
+            wf.src = 'assets/js/webfont.js';
+            wf.async = true;
+            s.parentNode.insertBefore( wf, s );
+        } )( document );
+    </script>
+
+    <link rel="preload" href="assets/vendor/fontawesome-free/webfonts/fa-regular-400.woff2" as="font" type="font/woff2"
+        crossorigin="anonymous">
+    <link rel="preload" href="assets/vendor/fontawesome-free/webfonts/fa-solid-900.woff2" as="font" type="font/woff2"
+        crossorigin="anonymous">
+    <link rel="preload" href="assets/vendor/fontawesome-free/webfonts/fa-brands-400.woff2" as="font" type="font/woff2"
+            crossorigin="anonymous">
+    <link rel="preload" href="assets/fonts/wolmart87d5.woff?png09e" as="font" type="font/woff" crossorigin="anonymous">
+
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/vendor/fontawesome-free/css/all.min.css">
+
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/vendor/magnific-popup/magnific-popup.min.css">
+
+    <!-- Default CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.min.css">
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <h1 class="d-none">Wolmart - Responsive Marketplace HTML Template</h1>
+        <!-- Start of Header -->
+        <header class="header header-border">
+            <div class="header-top">
+                <div class="container">
+                    <div class="header-left">
+                        <p class="welcome-msg">Welcome to JPAS Store!</p>
+                    </div>
+
+                    <div class="header-right">
+                        <span class="divider d-lg-show"></span>
+                        <a href="/auth/faq" class="d-lg-show">FAQ</a>
+                        <a href="/auth/about" class="d-lg-show">About Us</a>
+                        <a href="/auth/contact" class="d-lg-show">Contact Us</a>
+                        <span class="divider d-lg-show"></span>
+                        <a href="/store/account" class="d-lg-show">My Account</a>
+                        <a href="/auth/logout" class="d-lg-show sign-out"><i
+                                class="w-icon-account"></i>Sign Out</a>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Header Top -->
+
+            <div class="header-middle">
+                <div class="container">
+                    <div class="header-left mr-md-4">
+                        <a href="#" class="mobile-menu-toggle  w-icon-hamburger" aria-label="menu-toggle">
+                        </a>
+                        <a href="/" class="logo ml-lg-0">
+                            <img src="assets/images/logo.png" alt="logo" width="144" height="45" />
+                        </a>
+                        <form method="get" action="#"
+                            class="header-search hs-expanded hs-round d-none d-md-flex input-wrapper">
+                            <div class="select-box">
+                                <select id="category" name="category">
+                                    <option value="">All Categories</option>
+                                    <option value="4">Clothing</option>
+                                    <option value="5">E-Appliances</option>
+                                    <option value="6">Footwear</option>
+                                </select>
+                            </div>
+                            <input type="text" class="form-control" name="search" id="search" placeholder="Search in..."
+                                required />
+                            <button class="btn btn-search" type="submit"><i class="w-icon-search"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="header-right ml-4">
+                        <div class="dropdown cart-dropdown cart-offcanvas mr-0 mr-lg-2">
+                            <div class="cart-overlay"></div>
+                            <a href="/user/cart" class="cart-toggle label-down link">
+                                <i class="w-icon-cart">
+                                    <span class="cart-count">{{Cart|length}}</span>
+                                </i>
+                                <span class="cart-label">Cart</span>
+                            </a>
+                            <div class="dropdown-box">
+                                <div class="cart-header">
+                                    <span>Shopping Cart</span>
+                                    <a href="#" class="btn-close">Close<i class="w-icon-long-arrow-right"></i></a>
+                                </div>
+                                {% if Cart|length > 0 %}
+                                    <div class="products">
+                                        {% for item in Cart %}
+                                            <div class="product product-cart">
+                                                <div class="product-detail">
+                                                    <a href="/store/product{{item[0]}}" class="product-name">{{item[5]}}</a>
+                                                    <div class="price-box">
+                                                        <span class="product-quantity">{{item[1]}}</span>
+                                                        <span class="product-price">${{item[6]}}.00</span>
+                                                    </div>
+                                                </div>
+                                                <figure class="product-media">
+                                                    {% if item[7] == 1 %}
+                                                        <img src="assets/images/store/cart/1.jpg" alt="Product Image" />
+                                                    {% elif item[7] == 2 %}
+                                                        <img src="assets/images/store/cart/2.jpg" alt="Product Image" />
+                                                    {% else %}
+                                                        <img src="assets/images/store/cart/3.jpg" alt="product" height="84"
+                                                            width="94" />
+                                                    {% endif %}
+                                                </figure>
+                                                <form method="post" action="/user/cartremove">
+                                                    <input type="hidden" name="pdid" value="{{item[0]}}">
+                                                    <input type="hidden" name="quantity" value="{{item[1]}}">
+                                                    <input type="hidden" name="attr" value="{{item[3]}}">
+                                                    <input type="hidden" name="placed" value="{{item[4]}}">
+
+                                                    <button type="submit" class="btn btn-link btn-close" aria-label="button">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        {% endfor %}
+                                        <div class="cart-total cart-detail ">
+                                            <label>Total:</label>
+                                            <span class="price">${{CartTotal}}.00</span>
+                                        </div>
+
+                                        <div class="cart-action">
+                                            <a href="/user/cart" class="btn btn-dark btn-outline btn-rounded">View Cart</a>
+                                            <a href="/user/checkout" class="btn btn-primary  btn-rounded">Checkout</a>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="product product-cart">
+                                        <div class="product-detail">
+                                            <a class="product-name">
+                                                Your cart is currently empty
+                                            </a>
+                                            <div class="price-box">
+                                                <span class="product-quantity">Add to cart</span>
+                                                <span class="product-price">Have your cart filled</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <!-- End of Dropdown Box -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Header Middle -->
+        </header>
+        <!-- End of Header -->
+
+        <!-- Start of Main -->
+        <main class="main checkout">
+            <!-- Start of Breadcrumb -->
+            <nav class="breadcrumb-nav">
+                <div class="container">
+                    <ul class="breadcrumb shop-breadcrumb bb-no">
+                        <li class="passed"><a href="/user/cart">Shopping Cart</a></li>
+                        <li class="active"><a href="/user/checkout">Checkout</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <!-- End of Breadcrumb -->
+
+
+            <!-- Start of PageContent -->
+            <div class="page-content">
+                <div class="container">
+                    <div class="row mb-9">
+                        <div class="col-lg-7 pr-lg-4 mb-4">
+                            <h3 class="title billing-title text-uppercase ls-10 pt-1 pb-3 mb-0">
+                                Billing Details
+                            </h3>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="firstname">First name *</label>
+                                        <input type="text" id="firstname" name="firstname" value="{{Customer[1]}}"
+                                            class="form-control form-control-md" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="lastname">Last name *</label>
+                                        <input type="text" id="lastname" name="lastname" value="{{Customer[2]}}"
+                                            class="form-control form-control-md" readonly>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="phone">Phone *</label>
+                                        <input type="text" id="phone" name="phone" value="{{Customer[3]}}"
+                                            class="form-control form-control-md">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="email">Email address *</label>
+                                        <input type="email" id="email" name="email" value="{{Customer[4]}}"
+                                            class="form-control form-control-md" readonly>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="gender">Gender *</label>
+                                        <input type="text" id="gender" name="gender" value="{{Customer[5]}}"
+                                            class="form-control form-control-md" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="dob">Date Of Birth *</label>
+                                        <input type="date" id="dob" name="birthdate" value="{{Customer[6]}}"
+                                            class="form-control form-control-md" readonly>
+                                    </div>
+                                </div>
+                            </div>
+
+<!--                                    address form start-->
+                            <div class="icon-box icon-box-side icon-box-light">
+                                <span class="icon-box-icon icon-map-marker">
+                                    <i class="w-icon-map-marker"></i>
+                                </span>
+                                <div class="icon-box-content">
+                                    <h4 class="icon-box-title mb-0 ls-normal text-left">Address</h4>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="hno">House Number *</label>
+                                        <input type="number" id="hno" name="hno" value="{{Customer[8]}}"
+                                            class="form-control form-control-md mb-0" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="street">Street *</label>
+                                        <input type="text" id="street" name="street" value="{{Customer[9]}}"
+                                            class="form-control form-control-md-0" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="district">District *</label>
+                                        <input type="text" id="district" name="district" value="{{Customer[10]}}"
+                                            class="form-control form-control-md mb-0" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="city">City *</label>
+                                        <input type="text" id="city" name="district" value="{{Customer[11]}}"
+                                            class="form-control form-control-md mb-0" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="state">State *</label>
+                                        <input type="text" id="state" name="state" value="{{Customer[12]}}"
+                                            class="form-control form-control-md mb-0" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="postcode">Postcode *</label>
+                                        <input type="number" id="postcode" name="pincode" value="{{Customer[13]}}"
+                                            class="form-control form-control-md mb-0" readonly>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3"></div>
+
+                        </div>
+                        <div class="col-lg-5 mb-4 sticky-sidebar-wrapper">
+                            <div class="order-summary-wrapper sticky-sidebar">
+                                <h3 class="title text-uppercase ls-10">Your Order</h3>
+                                <div class="order-summary">
+                                    <table class="order-table">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2">
+                                                    <b>Product</b>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for order in Orders %}
+                                                <tr class="bb-no">
+                                                    <td class="product-name"> {{order[2][0:20]}}... <i
+                                                            class="fas fa-times"></i> <span
+                                                            class="product-quantity">{{order[0]}}</span></td>
+                                                    <td class="product-total">{{order[3]}} <i
+                                                            class="fas fa-times"></i> <span
+                                                            class="product-quantity">{{order[0]}}</span></td><br>
+                                                </tr>
+
+                                                <tr class="cart-subtotal bb-no">
+                                                    <td>
+                                                        <b>Subtotal</b>
+                                                    </td>
+                                                    <td>
+                                                        <b>${{order[1]}}.00</b>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                        <tfoot>
+                                            <tr class="shipping-methods">
+                                                <td colspan="2" class="text-left">
+                                                    <h4 class="title title-simple bb-no mb-1 pb-0 pt-3">Shipping
+                                                    </h4>
+                                                    <ul id="shipping-method" class="mb-4">
+                                                        <li>
+                                                            FLATE RATE
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                            <tr class="order-total">
+                                                <th>
+                                                    <b>Total</b>
+                                                </th>
+                                                <td>
+                                                    <b>${{Total}}.00</b>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+
+                                    <div class="payment-methods" id="payment_method">
+                                        <h4 class="title font-weight-bold ls-25 pb-0 mb-1">Payment Methods</h4>
+                                        <div class="accordion payment-accordion">
+                                            <select class="flex-wrap d-flex align-items-center product-variations" name="option" form="placeorder">
+                                                <option name="option"  class="size text-uppercase">UPI</option>
+                                                <option name="option" class="size text-uppercase">COD</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <form action="/user/placeorder" id="placeorder" method="post">
+                                        <div class="form-group place-order pt-6">
+                                            <button type="submit" class="btn btn-dark btn-block btn-rounded">Place Order</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End of PageContent -->
+        </main>
+        <!-- End of Main -->
+
+        <!-- Start of Footer -->
+        <footer class="footer appear-animate" data-animation-options="{
+            'name': 'fadeIn'
+        }">
+            <div class="footer-newsletter bg-primary pt-6 pb-6">
+                <div class="container">
+                    <div class="row justify-content-center align-items-center">
+                    </div>
+                </div>
+            </div>
+            <div class="container">`
+                <div class="footer-top">
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="widget widget-about">
+                                <a href="/" class="logo-footer">
+                                    <img src="assets/images/logo_footer.png" alt="logo-footer" width="144"
+                                        height="45" />
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="footer-middle">
+                    <div class="widget widget-category">
+                        <div class="category-box">
+                            <h6 class="category-name">Consumer Electric:</h6>
+                            <a href="/">TV Television</a>
+                            <a href="/">Air Condition</a>
+                            <a href="/">Refrigerator</a>
+                            <a href="/">Washing Machine</a>
+                            <a href="/">Audio Speaker</a>
+                            <a href="/">Security Camera</a>
+                            <a href="/">View All</a>
+                        </div>
+                        <div class="category-box">
+                            <h6 class="category-name">Clothing & Apparel:</h6>
+                            <a href="/">Men's T-shirt</a>
+                            <a href="/">Dresses</a>
+                            <a href="/">Men's Sneacker</a>
+                            <a href="/">Leather Backpack</a>
+                            <a href="/">Watches</a>
+                            <a href="/">Jeans</a>
+                            <a href="/">Sunglasses</a>
+                            <a href="/">Boots</a>
+                            <a href="/">Rayban</a>
+                            <a href="/">Acccessories</a>
+                        </div>
+                        <div class="category-box">
+                            <h6 class="category-name">Home, Garden & Kitchen:</h6>
+                            <a href="/">Sofa</a>
+                            <a href="/">Chair</a>
+                            <a href="/">Bed Room</a>
+                            <a href="/">Living Room</a>
+                            <a href="/">Cookware</a>
+                            <a href="/">Utensil</a>
+                            <a href="/">Blender</a>
+                            <a href="/">Garden Equipments</a>
+                            <a href="/">Decor</a>
+                            <a href="/">Library</a>
+                        </div>
+                        <div class="category-box">
+                            <h6 class="category-name">Health & Beauty:</h6>
+                            <a href="/">Skin Care</a>
+                            <a href="/">Body Shower</a>
+                            <a href="/">Makeup</a>
+                            <a href="/">Hair Care</a>
+                            <a href="/">Lipstick</a>
+                            <a href="/">Perfume</a>
+                            <a href="/">View all</a>
+                        </div>
+                        <div class="category-box">
+                            <h6 class="category-name">Jewelry & Watches:</h6>
+                            <a href="/">Necklace</a>
+                            <a href="/">Pendant</a>
+                            <a href="/">Diamond Ring</a>
+                            <a href="/">Silver Earing</a>
+                            <a href="/">Leather Watcher</a>
+                            <a href="/">Rolex</a>
+                            <a href="/">Gucci</a>
+                            <a href="/">Australian Opal</a>
+                            <a href="/">Ammolite</a>
+                            <a href="/">Sun Pyrite</a>
+                        </div>
+                        <div class="category-box">
+                            <h6 class="category-name">Computer & Technologies:</h6>
+                            <a href="/">Laptop</a>
+                            <a href="/">iMac</a>
+                            <a href="/">Smartphone</a>
+                            <a href="/">Tablet</a>
+                            <a href="/">Apple</a>
+                            <a href="/">Asus</a>
+                            <a href="/">Drone</a>
+                            <a href="/">Wireless Speaker</a>
+                            <a href="/">Game Controller</a>
+                            <a href="/">View all</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <div class="footer-left">
+                        <p class="copyright">Copyright © 2021 JPAS Store. All Rights Reserved.</p>
+                    </div>
+                    <div class="footer-right">
+                        <span class="payment-label mr-lg-8">We're using safe payment for</span>
+                        <p class="copyright">UPI and COD.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+    </div>
+    <!-- End of Page Wrapper -->
+    
+    <!-- Start of Scroll Top -->
+    <a id="scroll-top" class="scroll-top" href="#top" title="Top" role="button"> <i class="w-icon-angle-up"></i> <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 70"> <circle id="progress-indicator" fill="transparent" stroke="#000000" stroke-miterlimit="10" cx="35" cy="35" r="34" style="stroke-dasharray: 16.4198, 400;"></circle> </svg> </a>
+    <!-- End of Scroll Top -->
+
+    <!-- Plugin JS File -->
+    <script src="assets/vendor/jquery/jquery.min.js"></script>
+    <script src="assets/vendor/sticky/sticky.js"></script>
+    <script src="assets/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="assets/js/main.min.js"></script>
+</body>
+
+</html>

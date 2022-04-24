@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from portotheme.com/html/wolmart/shop-fullwidth-banner.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Apr 2022 07:15:04 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <title>Wolmart eCommmerce Marketplace HTML Template</title>
+
+    <meta name="keywords" content="Marketplace ecommerce responsive HTML5 Template" />
+    <meta name="author" content="D-THEMES">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/icons/favicon.png">
+
+    <!-- WebFont.js -->
+    <script>
+        WebFontConfig = {
+            google: { families: ['Poppins:400,500,600,700'] }
+        };
+        (function (d) {
+            var wf = d.createElement('script'), s = d.scripts[0];
+            wf.src = 'assets/js/webfont.js';
+            wf.async = true;
+            s.parentNode.insertBefore(wf, s);
+        })(document);
+    </script>
+
+    <link rel="preload" href="assets/vendor/fontawesome-free/webfonts/fa-regular-400.woff2" as="font" type="font/woff2"
+        crossorigin="anonymous">
+    <link rel="preload" href="assets/vendor/fontawesome-free/webfonts/fa-solid-900.woff2" as="font" type="font/woff2"
+        crossorigin="anonymous">
+    <link rel="preload" href="assets/vendor/fontawesome-free/webfonts/fa-brands-400.woff2" as="font" type="font/woff2"
+            crossorigin="anonymous">
+    <link rel="preload" href="assets/fonts/wolmart87d5.woff?png09e" as="font" type="font/woff" crossorigin="anonymous">
+
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/vendor/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/vendor/animate/animate.min.css">
+
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="assets/vendor/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/vendor/nouislider/nouislider.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/vendor/magnific-popup/magnific-popup.min.css">
+
+    <!-- Default CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.min.css">
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <h1 class="d-none">Wolmart - Responsive Marketplace HTML Template</h1>
+
+        <!-- Start of Header -->
+        <header class="header header-border">
+            <div class="header-top">
+                <div class="container">
+                    <div class="header-left">
+                        <p class="welcome-msg">Welcome to JPAS Store!</p>
+                    </div>
+
+                    <div class="header-right">
+                        <span class="divider d-lg-show"></span>
+                        <a href="/auth/faq" class="d-lg-show">FAQ</a>
+                        <a href="/auth/about" class="d-lg-show">About Us</a>
+                        <a href="/auth/contact" class="d-lg-show">Contact Us</a>
+                        <span class="divider d-lg-show"></span>
+                        <a href="/store/account" class="d-lg-show">My Account</a>
+                        <a href="/auth/logout" class="d-lg-show sign-out"><i
+                                class="w-icon-account"></i>Sign Out</a>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Header Top -->
+
+            <div class="header-middle">
+                <div class="container">
+                    <div class="header-left mr-md-4">
+                        <a href="#" class="mobile-menu-toggle  w-icon-hamburger" aria-label="menu-toggle">
+                        </a>
+                        <a href="/" class="logo ml-lg-0">
+                            <img src="assets/images/logo.png" alt="logo" width="144" height="45" />
+                        </a>
+                        <form method="get" action="#"
+                            class="header-search hs-expanded hs-round d-none d-md-flex input-wrapper">
+                            <div class="select-box">
+                                <select id="category" name="category">
+                                    <option value="">All Categories</option>
+                                    <option value="4">Clothing</option>
+                                    <option value="5">E-Appliances</option>
+                                    <option value="6">Footwear</option>
+                                </select>
+                            </div>
+                            <input type="text" class="form-control" name="search" id="search" placeholder="Search in..."
+                                required />
+                            <button class="btn btn-search" type="submit"><i class="w-icon-search"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="header-right ml-4">
+                        <div class="dropdown cart-dropdown cart-offcanvas mr-0 mr-lg-2">
+                            <div class="cart-overlay"></div>
+                            <a href="/user/cart" class="cart-toggle label-down link">
+                                <i class="w-icon-cart">
+                                    <span class="cart-count">{{Cart|length}}</span>
+                                </i>
+                                <span class="cart-label">Cart</span>
+                            </a>
+                            <div class="dropdown-box">
+                                <div class="cart-header">
+                                    <span>Shopping Cart</span>
+                                    <a href="#" class="btn-close">Close<i class="w-icon-long-arrow-right"></i></a>
+                                </div>
+                                {% if Cart|length > 0 %}
+                                    <div class="products">
+                                        {% for item in Cart %}
+                                            <div class="product product-cart">
+                                                <div class="product-detail">
+                                                    <a href="/store/product{{item[0]}}" class="product-name">{{item[5]}}</a>
+                                                    <div class="price-box">
+                                                        <span class="product-quantity">{{item[1]}}</span>
+                                                        <span class="product-price">${{item[6]}}.00</span>
+                                                    </div>
+                                                </div>
+                                                <figure class="product-media">
+                                                    {% if item[7] == 1 %}
+                                                        <img src="assets/images/store/cart/1.jpg" alt="Product Image" />
+                                                    {% elif item[7] == 2 %}
+                                                        <img src="assets/images/store/cart/2.jpg" alt="Product Image" />
+                                                    {% else %}
+                                                        <img src="assets/images/store/cart/3.jpg" alt="product" height="84"
+                                                            width="94" />
+                                                    {% endif %}
+                                                </figure>
+                                                <form method="post" action="/user/cartremove">
+                                                    <input type="hidden" name="pdid" value="{{item[0]}}">
+                                                    <input type="hidden" name="quantity" value="{{item[1]}}">
+                                                    <input type="hidden" name="attr" value="{{item[3]}}">
+                                                    <input type="hidden" name="placed" value="{{item[4]}}">
+
+                                                    <button type="submit" class="btn btn-link btn-close" aria-label="button">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        {% endfor %}
+                                        <div class="cart-total cart-detail ">
+                                            <label>Total:</label>
+                                            <span class="price">${{CartTotal}}.00</span>
+                                        </div>
+
+                                        <div class="cart-action">
+                                            <a href="/user/cart" class="btn btn-dark btn-outline btn-rounded">View Cart</a>
+                                            <a href="/user/checkout" class="btn btn-primary  btn-rounded">Checkout</a>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="product product-cart">
+                                        <div class="product-detail">
+                                            <a class="product-name">
+                                                Your cart is currently empty
+                                            </a>
+                                            <div class="price-box">
+                                                <span class="product-quantity">Add to cart</span>
+                                                <span class="product-price">Have your cart filled</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <!-- End of Dropdown Box -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Header Middle -->
+        </header>
+        <!-- End of Header -->
+
+        <!-- Start of Main -->
+        <main class="main">
+            <!-- Start of Breadcrumbs -->
+            <nav class="breadcrumb-nav">
+                <div class="container">
+                    <ul class="breadcrumb">
+                        <li><a href="/">Home</a></li>
+                        <li>Footwears</li>
+                    </ul>
+                </div>
+            </nav>
+            <!-- End of Breadcrumbs -->
+
+            <!-- Start of Page Content -->
+            <div class="page-content mb-10">
+                <div class="shop-default-banner shop-boxed-banner banner d-flex align-items-center mb-6"
+                    style="background-image: url(assets/images/store/category/slide-1.jpg); background-color: #ebeef2;">
+                    <figure>
+                        <img src="assets/images/store/category/footwear.png" alt="Banner" width="100" height="50">
+                    </figure>
+                    <div class="container banner-content text-right">
+                        <h3 class="banner-title blue text-uppercase font-weight-bolder ls-10">Footwears Collection</h3>
+                    </div>
+                </div>
+                <!-- End of Shop Banner -->
+
+                <div class="container-fluid">
+                    <!-- Start of Shop Content -->
+                    <div class="shop-content">
+                        <!-- Start of Shop Main Content -->
+                        <div class="main-content">
+                            <nav class="toolbox sticky-toolbox sticky-content fix-top">
+                                <div class="toolbox-left">
+                                    <a href="#" class="btn btn-primary btn-outline btn-rounded left-sidebar-toggle 
+                                        btn-icon-left"><i class="w-icon-category"></i><span>Filters</span></a>
+                                    <div class="toolbox-item toolbox-sort select-box text-dark">
+                                        <label>Sort By :</label>
+                                        <select name="orderby" class="form-control">
+                                            <option value="default" selected="selected">Default sorting</option>
+                                            <option value="price-low">Sort by price: low to high</option>
+                                            <option value="price-high">Sort by price: high to low</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </nav>
+
+                            <div class="product-wrapper row cols-xl-6 cols-lg-5 cols-md-4 cols-sm-3 cols-2">
+                                {% for product in Footwears %}
+                                    <div class="product-wrap">
+                                    <div class="product text-center">
+                                        <figure class="product-media">
+                                            <a href="/store/product{{product[0]}}">
+                                            {% if product[1] == 1 %}
+                                                <img src="assets/images/store/products/clothes/1.jpg" alt="Product" width="300"
+                                                    height="338" />
+                                            {% elif product[1] == 2 %}
+                                                <img src="assets/images/store/products/footwears/1.jpg" alt="Product" width="300"
+                                                    height="338" />
+                                            {% else %}
+                                                <img src="assets/images/store/products/e-appliances/2.jpg" alt="Product" width="300"
+                                                    height="338" />
+                                            {% endif %}
+                                            </a>
+                                            <div class="product-action-horizontal"></div>
+                                            {% if product[9] != 0 %}
+                                            <div class="product-label-group">
+                                                <label class="product-label label-discount">${{product[8]}}.00 Off</label>
+                                            </div>
+                                            {% endif %}
+                                        </figure>
+                                        <div class="product-details">
+                                            <div class="product-cat">
+                                                {% if product[1] == 1 %}
+                                                    <a href="/store/clothes">{{product[3]}}</a>
+                                                {% elif product[1] == 2 %}
+                                                    <a href="/store/footwears">{{product[3]}}</a>
+                                                {% else %}
+                                                    <a href="/store/eappliances">{{product[3]}}</a>
+                                                {% endif %}
+                                            </div>
+                                            <h3 class="product-name">
+                                                <a href="/store/product{{product[0]}}">{{product[2]}}</a>
+                                            </h3>
+                                            <span >{{product[5]}}</span>
+                                            <div class="ratings-container">
+                                                <div class="ratings-full">
+                                                    <span class="ratings" style="width: {{product[9] * 100 / 5}}%;"></span>
+                                                    <span class="tooltiptext tooltip-top"></span>
+                                                </div>
+                                            </div>
+                                            <div class="product-pa-wrapper">
+                                                <div class="product-price">
+                                                    <ins class="new-price">${{product[6]}}.00</ins><del
+                                                        class="old-price">${{product[7]}}.00</del>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+
+                            <div class="toolbox toolbox-pagination justify-content-between">
+                                <p class="showing-info mb-2 mb-sm-0">
+                                    Showing<span>1-12 of 60</span>Products
+                                </p>
+                                <ul class="pagination">
+                                    <li class="prev disabled">
+                                        <a href="#" aria-label="Previous" tabindex="-1" aria-disabled="true">
+                                            <i class="w-icon-long-arrow-left"></i>Prev
+                                        </a>
+                                    </li>
+                                    <li class="page-item active">
+                                        <a class="page-link" href="#">1</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">2</a>
+                                    </li>
+                                    <li class="next">
+                                        <a href="#" aria-label="Next">
+                                            Next<i class="w-icon-long-arrow-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- End of Shop Main Content -->
+
+                        <!-- Start of Sidebar, Shop Sidebar -->
+                        <aside class="sidebar shop-sidebar left-sidebar sticky-sidebar-wrapper">
+                            <!-- Start of Sidebar Overlay -->
+                            <div class="sidebar-overlay"></div>
+                            <a class="sidebar-close" href="#"><i class="close-icon"></i></a>
+
+                            <!-- Start of Sidebar Content -->
+                            <div class="sidebar-content scrollable">
+                                <div class="filter-actions">
+                                    <label>Filter :</label>
+                                    <a href="#" class="btn btn-dark btn-link filter-clean">Clean All</a>
+                                </div>
+                                <!-- Start of Collapsible widget -->
+                                <div class="widget ">
+                                    <h3 class="widget-title"><span>Footwear Category</span></h3>
+                                </div>
+                                <!-- End of Collapsible Widget -->
+
+                                <!-- Start of Collapsible Widget -->
+                                <div class="widget widget-collapsible">
+                                    <h3 class="widget-title"><span>Price</span></h3>
+                                    <div class="widget-body">
+                                        <form class="price-range">
+                                            <input type="number" name="min_price" class="min_price text-center"
+                                                placeholder="$min"><span class="delimiter">-</span><input type="number"
+                                                name="max_price" class="max_price text-center" placeholder="$max"><a
+                                                href="#" class="btn btn-primary btn-rounded">Go</a>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- End of Collapsible Widget -->
+
+                                <!-- Start of Collapsible Widget -->
+                                <div class="widget widget-collapsible">
+                                    <h3 class="widget-title"><span>Size</span></h3>
+
+                                    <div class="widget-body">
+                                        <form class="price-range">
+                                            <input type="number" name="Size" class="min_price text-center" placeholder="#size">
+                                            <a href="#" class="btn btn-primary btn-rounded">Go</a>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- End of Collapsible Widget -->
+
+                                <!-- Start of Collapsible Widget -->
+                                <div class="widget widget-collapsible">
+                                    <h3 class="widget-title"><span>Gender</span></h3>
+                                    <ul class="widget-body filter-items item-check mt-1">
+                                        <li><a href="#">Male</a></li>
+                                        <li><a href="#">Female</a></li>
+                                        <li><a href="#">Others</a></li>
+                                    </ul>
+                                </div>
+                                <!-- End of Collapsible Widget -->
+
+                                <!-- Start of Collapsible Widget -->
+                                <div class="widget widget-collapsible">
+                                    <h3 class="widget-title"><span>Color</span></h3>
+                                    <div class="widget-body">
+                                        <form class="price-range">
+                                            <input type="text" name="Color" class="min_price text-center"
+                                                placeholder="Color">
+                                            <a href="#" class="btn btn-primary btn-rounded">Go</a>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- End of Collapsible Widget -->
+                            </div>
+                            <!-- End of Sidebar Content -->
+                        </aside>
+                        <!-- End of Shop Sidebar -->
+                    </div>
+                    <!-- End of Shop Content -->
+                </div>
+            </div>
+            <!-- End of Page Content -->
+        </main>
+        <!-- End of Main -->
+
+        <!-- Start of Footer -->
+        <footer class="footer appear-animate" data-animation-options="{
+            'name': 'fadeIn'
+        }">
+            <div class="footer-newsletter bg-primary pt-6 pb-6">
+                <div class="container">
+                    <div class="row justify-content-center align-items-center">
+                    </div>
+                </div>
+            </div>
+            <div class="container">`
+                <div class="footer-top">
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="widget widget-about">
+                                <a href="/" class="logo-footer">
+                                    <img src="assets/images/logo_footer.png" alt="logo-footer" width="144"
+                                        height="45" />
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="footer-middle">
+                    <div class="widget widget-category">
+                        <div class="category-box">
+                            <h6 class="category-name">Consumer Electric:</h6>
+                            <a href="/">TV Television</a>
+                            <a href="/">Air Condition</a>
+                            <a href="/">Refrigerator</a>
+                            <a href="/">Washing Machine</a>
+                            <a href="/">Audio Speaker</a>
+                            <a href="/">Security Camera</a>
+                            <a href="/">View All</a>
+                        </div>
+                        <div class="category-box">
+                            <h6 class="category-name">Clothing & Apparel:</h6>
+                            <a href="/">Men's T-shirt</a>
+                            <a href="/">Dresses</a>
+                            <a href="/">Men's Sneacker</a>
+                            <a href="/">Leather Backpack</a>
+                            <a href="/">Watches</a>
+                            <a href="/">Jeans</a>
+                            <a href="/">Sunglasses</a>
+                            <a href="/">Boots</a>
+                            <a href="/">Rayban</a>
+                            <a href="/">Acccessories</a>
+                        </div>
+                        <div class="category-box">
+                            <h6 class="category-name">Home, Garden & Kitchen:</h6>
+                            <a href="/">Sofa</a>
+                            <a href="/">Chair</a>
+                            <a href="/">Bed Room</a>
+                            <a href="/">Living Room</a>
+                            <a href="/">Cookware</a>
+                            <a href="/">Utensil</a>
+                            <a href="/">Blender</a>
+                            <a href="/">Garden Equipments</a>
+                            <a href="/">Decor</a>
+                            <a href="/">Library</a>
+                        </div>
+                        <div class="category-box">
+                            <h6 class="category-name">Health & Beauty:</h6>
+                            <a href="/">Skin Care</a>
+                            <a href="/">Body Shower</a>
+                            <a href="/">Makeup</a>
+                            <a href="/">Hair Care</a>
+                            <a href="/">Lipstick</a>
+                            <a href="/">Perfume</a>
+                            <a href="/">View all</a>
+                        </div>
+                        <div class="category-box">
+                            <h6 class="category-name">Jewelry & Watches:</h6>
+                            <a href="/">Necklace</a>
+                            <a href="/">Pendant</a>
+                            <a href="/">Diamond Ring</a>
+                            <a href="/">Silver Earing</a>
+                            <a href="/">Leather Watcher</a>
+                            <a href="/">Rolex</a>
+                            <a href="/">Gucci</a>
+                            <a href="/">Australian Opal</a>
+                            <a href="/">Ammolite</a>
+                            <a href="/">Sun Pyrite</a>
+                        </div>
+                        <div class="category-box">
+                            <h6 class="category-name">Computer & Technologies:</h6>
+                            <a href="/">Laptop</a>
+                            <a href="/">iMac</a>
+                            <a href="/">Smartphone</a>
+                            <a href="/">Tablet</a>
+                            <a href="/">Apple</a>
+                            <a href="/">Asus</a>
+                            <a href="/">Drone</a>
+                            <a href="/">Wireless Speaker</a>
+                            <a href="/">Game Controller</a>
+                            <a href="/">View all</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <div class="footer-left">
+                        <p class="copyright">Copyright © 2021 JPAS Store. All Rights Reserved.</p>
+                    </div>
+                    <div class="footer-right">
+                        <span class="payment-label mr-lg-8">We're using safe payment for</span>
+                        <p class="copyright">UPI and COD.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+    </div>
+    <!-- End of Page-wrapper-->
+
+
+    <!-- Start of Scroll Top -->
+    <a id="scroll-top" class="scroll-top" href="#top" title="Top" role="button"> <i class="w-icon-angle-up"></i> <svg
+            version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 70">
+            <circle id="progress-indicator" fill="transparent" stroke="#000000" stroke-miterlimit="10" cx="35" cy="35"
+                r="34" style="stroke-dasharray: 16.4198, 400;"></circle>
+        </svg> </a>
+    <!-- End of Scroll Top -->
+
+    <!-- Start of Quick View -->
+    <div class="product product-single product-popup">
+        <div class="row gutter-lg">
+            <div class="col-md-6 mb-4 mb-md-0">
+                <div class="product-gallery product-gallery-sticky">
+                    <div class="swiper-container product-single-swiper swiper-theme nav-inner">
+                        <div class="swiper-wrapper row cols-1 gutter-no">
+                            <div class="swiper-slide">
+                                <figure class="product-image">
+                                    <img src="assets/images/products/popup/1-440x494.jpg"
+                                        data-zoom-image="assets/images/products/popup/1-800x900.jpg"
+                                        alt="Water Boil Black Utensil" width="800" height="900">
+                                </figure>
+                            </div>
+                            <div class="swiper-slide">
+                                <figure class="product-image">
+                                    <img src="assets/images/products/popup/2-440x494.jpg"
+                                        data-zoom-image="assets/images/products/popup/2-800x900.jpg"
+                                        alt="Water Boil Black Utensil" width="800" height="900">
+                                </figure>
+                            </div>
+                            <div class="swiper-slide">
+                                <figure class="product-image">
+                                    <img src="assets/images/products/popup/3-440x494.jpg"
+                                        data-zoom-image="assets/images/products/popup/3-800x900.jpg"
+                                        alt="Water Boil Black Utensil" width="800" height="900">
+                                </figure>
+                            </div>
+                            <div class="swiper-slide">
+                                <figure class="product-image">
+                                    <img src="assets/images/products/popup/4-440x494.jpg"
+                                        data-zoom-image="assets/images/products/popup/4-800x900.jpg"
+                                        alt="Water Boil Black Utensil" width="800" height="900">
+                                </figure>
+                            </div>
+                        </div>
+                        <button class="swiper-button-next"></button>
+                        <button class="swiper-button-prev"></button>
+                    </div>
+                    <div class="product-thumbs-wrap swiper-container" data-swiper-options="{
+                        'navigation': {
+                            'nextEl': '.swiper-button-next',
+                            'prevEl': '.swiper-button-prev'
+                        }
+                    }">
+                        <div class="product-thumbs swiper-wrapper row cols-4 gutter-sm">
+                            <div class="product-thumb swiper-slide">
+                                <img src="assets/images/products/popup/1-103x116.jpg" alt="Product Thumb" width="103"
+                                    height="116">
+                            </div>
+                            <div class="product-thumb swiper-slide">
+                                <img src="assets/images/products/popup/2-103x116.jpg" alt="Product Thumb" width="103"
+                                    height="116">
+                            </div>
+                            <div class="product-thumb swiper-slide">
+                                <img src="assets/images/products/popup/3-103x116.jpg" alt="Product Thumb" width="103"
+                                    height="116">
+                            </div>
+                            <div class="product-thumb swiper-slide">
+                                <img src="assets/images/products/popup/4-103x116.jpg" alt="Product Thumb" width="103"
+                                    height="116">
+                            </div>
+                        </div>
+                        <button class="swiper-button-next"></button>
+                        <button class="swiper-button-prev"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 overflow-hidden p-relative">
+                <div class="product-details scrollable pl-0">
+                    <h2 class="product-title">Electronics Black Wrist Watch</h2>
+                    <div class="product-bm-wrapper">
+                        <figure class="brand">
+                            <img src="assets/images/products/brand/brand-1.jpg" alt="Brand" width="102" height="48" />
+                        </figure>
+                        <div class="product-meta">
+                            <div class="product-categories">
+                                Category:
+                                <span class="product-category"><a href="#">Electronics</a></span>
+                            </div>
+                            <div class="product-sku">
+                                SKU: <span>MS46891340</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="product-divider">
+
+                    <div class="product-price">$40.00</div>
+
+                    <div class="ratings-container">
+                        <div class="ratings-full">
+                            <span class="ratings" style="width: 80%;"></span>
+                            <span class="tooltiptext tooltip-top"></span>
+                        </div>
+                        <a href="#" class="rating-reviews">(3 Reviews)</a>
+                    </div>
+
+                    <div class="product-short-desc">
+                        <ul class="list-type-check list-style-none">
+                            <li>Ultrices eros in cursus turpis massa cursus mattis.</li>
+                            <li>Volutpat ac tincidunt vitae semper quis lectus.</li>
+                            <li>Aliquam id diam maecenas ultricies mi eget mauris.</li>
+                        </ul>
+                    </div>
+
+                    <hr class="product-divider">
+
+                    <div class="product-form product-variation-form product-color-swatch">
+                        <label>Color:</label>
+                        <div class="d-flex align-items-center product-variations">
+                            <a href="#" class="color" style="background-color: #ffcc01"></a>
+                            <a href="#" class="color" style="background-color: #ca6d00;"></a>
+                            <a href="#" class="color" style="background-color: #1c93cb;"></a>
+                            <a href="#" class="color" style="background-color: #ccc;"></a>
+                            <a href="#" class="color" style="background-color: #333;"></a>
+                        </div>
+                    </div>
+                    <div class="product-form product-variation-form product-size-swatch">
+                        <label class="mb-1">Size:</label>
+                        <div class="flex-wrap d-flex align-items-center product-variations">
+                            <a href="#" class="size">Small</a>
+                            <a href="#" class="size">Medium</a>
+                            <a href="#" class="size">Large</a>
+                            <a href="#" class="size">Extra Large</a>
+                        </div>
+                        <a href="#" class="product-variation-clean">Clean All</a>
+                    </div>
+
+                    <div class="product-variation-price">
+                        <span></span>
+                    </div>
+
+                    <div class="product-form">
+                        <div class="product-qty-form">
+                            <div class="input-group">
+                                <input class="quantity form-control" type="number" min="1" max="10000000">
+                                <button class="quantity-plus w-icon-plus"></button>
+                                <button class="quantity-minus w-icon-minus"></button>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary btn-cart">
+                            <i class="w-icon-cart"></i>
+                            <span>Add to Cart</span>
+                        </button>
+                    </div>
+
+                    <div class="social-links-wrapper">
+                        <div class="social-links">
+                            <div class="social-icons social-no-color border-thin">
+                                <a href="#" class="social-icon social-facebook w-icon-facebook"></a>
+                                <a href="#" class="social-icon social-twitter w-icon-twitter"></a>
+                                <a href="#" class="social-icon social-pinterest fab fa-pinterest-p"></a>
+                                <a href="#" class="social-icon social-whatsapp fab fa-whatsapp"></a>
+                                <a href="#" class="social-icon social-youtube fab fa-linkedin-in"></a>
+                            </div>
+                        </div>
+                        <span class="divider d-xs-show"></span>
+                        <div class="product-link-wrapper d-flex">
+                            <a href="#" class="btn-product-icon btn-wishlist w-icon-heart"><span></span></a>
+                            <a href="#"
+                                class="btn-product-icon btn-compare btn-icon-left w-icon-compare"><span></span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of Quick view -->
+
+    <!-- Plugin JS File -->
+    <script src="assets/vendor/jquery/jquery.min.js"></script>
+    <script src="assets/vendor/sticky/sticky.js"></script>
+    <script src="assets/vendor/jquery.plugin/jquery.plugin.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/nouislider/nouislider.min.js"></script>
+    <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+    <script src="assets/vendor/zoom/jquery.zoom.js"></script>
+    <script src="assets/vendor/jquery.countdown/jquery.countdown.min.js"></script>
+    <script src="assets/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Main JS -->
+    <script src="assets/js/main.min.js"></script>
+</body>
+
+</html>
