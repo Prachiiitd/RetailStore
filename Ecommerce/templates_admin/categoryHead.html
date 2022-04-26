@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from portotheme.com/html/wolmart/CatHead.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Apr 2022 07:14:32 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <title>Wolmart eCommmerce Marketplace HTML Template</title>
+
+    <meta name="keywords" content="Marketplace ecommerce responsive HTML5 Template" />
+    <meta name="description" content="Wolmart is powerful marketplace &amp; ecommerce responsive Html5 Template.">
+    <meta name="author" content="D-THEMES">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/icons/favicon.png">
+
+    <!-- WebFont.js -->
+    <script>
+        WebFontConfig = {
+            google: { families: ['Poppins:400,500,600,700'] }
+        };
+        ( function ( d ) {
+            var wf = d.createElement( 'script' ), s = d.scripts[0];
+            wf.src = 'assets/js/webfont.js';
+            wf.async = true;
+            s.parentNode.insertBefore( wf, s );
+        } )( document );
+    </script>
+
+    <link rel="preload" href="assets/vendor/fontawesome-free/webfonts/fa-regular-400.woff2" as="font" type="font/woff2"
+        crossorigin="anonymous">
+    <link rel="preload" href="assets/vendor/fontawesome-free/webfonts/fa-solid-900.woff2" as="font" type="font/woff2"
+        crossorigin="anonymous">
+    <link rel="preload" href="assets/vendor/fontawesome-free/webfonts/fa-brands-400.woff2" as="font" type="font/woff2"
+            crossorigin="anonymous">
+    <link rel="preload" href="assets/fonts/wolmart87d5.woff?png09e" as="font" type="font/woff" crossorigin="anonymous">
+
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/vendor/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="assets/vendor/swiper/swiper-bundle.min.css">
+
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/vendor/magnific-popup/magnific-popup.min.css">
+
+    <!-- Default CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.min.css">
+</head>
+
+<body class="my-account">
+    <div class="page-wrapper">
+        <!-- Start of Header -->
+        <header class="header">
+            <div class="header-top">
+                <div class="container">
+                    <div class="header-left">
+                        <p class="welcome-msg">Welcome to JPAS Store!</p>
+                    </div>
+
+                    <div class="header-right">
+                        <span class="divider d-lg-show"></span>
+                        <a href="/auth/faq" class="d-lg-show">FAQ</a>
+                        <a href="/auth/about" class="d-lg-show">About Us</a>
+                        <a href="/auth/contact" class="d-lg-show">Contact Us</a>
+                        <span class="divider d-lg-show"></span>
+                        <a href="/store/account" class="d-lg-show">My Account</a>
+                        <a href="/auth/logout" class="d-lg-show sign-out"><i
+                                class="w-icon-account"></i>Sign Out</a>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Header Top -->
+
+            <div class="header-middle">
+                <div class="container">
+                    <div class="header-left mr-md-4">
+                        <a href="#" class="mobile-menu-toggle  w-icon-hamburger" aria-label="menu-toggle">
+                        </a>
+                        <a href="/" class="logo ml-lg-0">
+                            <img src="assets/images/logo.png" alt="logo" width="144" height="45" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Header Middle -->
+        </header>
+        <!-- End of Header -->
+
+
+        <!-- Start of Main -->
+        <main class="main">
+            <!-- Start of Page Header -->
+            <div class="page-header">
+                <div class="container">
+                    <h1 class="page-title mb-0">Category Head Account</h1><br>
+                    {% if CatHead[19] == 1 %}
+                        Clothes
+                    {% elif CatHead[19] == 2 %}
+                        Footwear
+                    {% else %}
+                        E-Appliances
+                    {% endif %}
+                </div>
+            </div>
+            <!-- End of Page Header -->
+
+            <!-- Start of Breadcrumb -->
+            <nav class="breadcrumb-nav">
+                <div class="container">
+                    <ul class="breadcrumb">
+                        <li>CatHead (
+                            {% if CatHead[19] == 1 %}
+                                Clothes
+                            {% elif CatHead[19] == 2 %}
+                                Footwear
+                            {% else %}
+                                E-Appliances
+                            {% endif %}
+                            ) Home</li>
+                    </ul>
+                </div>
+            </nav>
+            <!-- End of Breadcrumb -->
+
+            {% with messages = get_flashed_messages() %}
+                 {% if messages %}
+                       {% for message in messages %}
+                            <div class="alert alert-dark alert-bg alert-block alert-inline show-code-action">
+
+                                {{message}}
+                                <button class="btn btn-link btn-close" aria-label="button">
+                                    <i class="close-icon"></i>
+                                </button>
+                            </div>
+                       {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <!-- Start of PageContent -->
+            <div class="page-content pt-2">
+                <div class="container">
+                    <div class="tab tab-vertical row gutter-lg">
+                        <ul class="nav nav-tabs mb-6" role="tablist">
+                            <li class="nav-item">
+                                <a href="#account-dashboard" id="#dashboard" class="nav-link active">Dashboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#account-inventory" class="nav-link">Inventory</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#account-products" class="nav-link">Products
+                                    ({% if Products | length > 0 %}
+                                        {% if Products[0][1]  == 1 %}
+                                            Clothes
+                                        {% elif Products[0][1]  == 2 %}
+                                            Footwear
+                                        {% else %}
+                                            E-Appliances
+                                        {% endif %}
+                                    {% else %}
+                                        No Products
+                                    {% endif %})</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#account-employees" class="nav-link">Employees</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#account-addresses" class="nav-link">Addresses</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#account-details" class="nav-link">Account details</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#account-addProduct" class="nav-link">Add New Product</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#account-addEmployee" class="nav-link">Add Worker</a>
+                            </li>
+                            <li class="link-item">
+                                <a href="/adAuth/logout">Logout</a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content mb-6">
+                            <div class="tab-pane active in" id="account-dashboard">
+                                <p class="greeting">
+                                    Hello
+                                    <span class="text-dark font-weight-bold">{{CatHead[1]}} {{CatHead[2]}}</span>
+                                    (not
+                                    <span class="text-dark font-weight-bold">{{CatHead[1]}} {{CatHead[2]}}</span>?
+                                    <a href="/adAuth/logout" class="text-primary">Log out</a>)
+                                </p><br>
+
+
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-6 col-sm-4 col-xs-6 mb-4">
+                                        <a href="#account-inventory" class="link-to-tab">
+                                            <div class="icon-box text-center">
+                                                <span class="icon-box-icon icon-shopify">
+                                                    <i class="w-icon-shopify"></i>
+                                                </span>
+                                                <div class="icon-box-content">
+                                                    <p class="text-uppercase mb-0">Inventory</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-4 col-xs-6 mb-4">
+                                        <a href="#account-products" class="link-to-tab">
+                                            <div class="icon-box text-center">
+                                                <span class="icon-box-icon icon-products">
+                                                    <i class="w-icon-products"></i>
+                                                </span>
+                                                <div class="icon-box-content">
+                                                    <p class="text-uppercase mb-0">Products
+                                                    ({% if Products | length > 0 %}
+                                                        {% if Products[0][1]  == 1 %}
+                                                            Clothes
+                                                        {% elif Products[0][1]  == 2 %}
+                                                            Footwear
+                                                        {% else %}
+                                                            E-Appliances
+                                                        {% endif %}
+                                                    {% else %}
+                                                        No Products
+                                                    {% endif %})</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-4 col-xs-6 mb-4">
+                                        <a href="#account-employees" class="link-to-tab">
+                                            <div class="icon-box text-center">
+                                                <span class="icon-box-icon icon-honour">
+                                                    <i class="w-icon-honour"></i>
+                                                </span>
+                                                <div class="icon-box-content">
+                                                    <p class="text-uppercase mb-0">Employees</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-4 col-xs-6 mb-4">
+                                        <a href="#account-addresses" class="link-to-tab">
+                                            <div class="icon-box text-center">
+                                                <span class="icon-box-icon icon-address">
+                                                    <i class="w-icon-map-marker"></i>
+                                                </span>
+                                                <div class="icon-box-content">
+                                                    <p class="text-uppercase mb-0">Addresses</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-4 col-xs-6 mb-4">
+                                        <a href="#account-details" class="link-to-tab">
+                                            <div class="icon-box text-center">
+                                                <span class="icon-box-icon icon-account">
+                                                    <i class="w-icon-user"></i>
+                                                </span>
+                                                <div class="icon-box-content">
+                                                    <p class="text-uppercase mb-0">Account Details</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-4 col-xs-6 mb-4">
+                                        <a href="#account-addProduct" class="link-to-tab">
+                                            <div class="icon-box text-center">
+                                                <span class="icon-box-icon icon-plus">
+                                                    <i class="w-icon-plus"></i>
+                                                </span>
+                                                <div class="icon-box-content">
+                                                    <p class="text-uppercase mb-0">Add New Product</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-6 col-sm-4 col-xs-6 mb-4">
+                                        <a href="#account-addEmployee" class="link-to-tab">
+                                            <div class="icon-box text-center">
+                                                <span class="icon-box-icon icon-plus    ">
+                                                    <i class="w-icon-plus"></i>
+                                                </span>
+                                                <div class="icon-box-content">
+                                                    <p class="text-uppercase mb-0">Add Employee</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-6 col-sm-4 col-xs-6 mb-4">
+                                        <a href="/auth/logout">
+                                            <div class="icon-box text-center">
+                                                <span class="icon-box-icon icon-logout">
+                                                    <i class="w-icon-logout"></i>
+                                                </span>
+                                                <div class="icon-box-content">
+                                                    <p class="text-uppercase mb-0">Logout</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane mb-4" id="account-inventory">
+                                <div class="icon-box icon-box-side icon-box-light">
+                                    <span class="icon-box-icon icon-shopify">
+                                        <i class="w-icon-shopify"></i>
+                                    </span>
+                                    <div class="icon-box-content">
+                                        <h4 class="icon-box-title text-capitalize ls-normal mb-0">Inventory: {{Inventory[0]}}</h4>
+                                    </div>
+                                </div>
+
+                                <table class="shop-table account-orders-table mb-7">
+                                    <thead>
+                                        <tr>
+                                            <th class="order-id">Product ID</th>
+                                            <th class="order-date">Name</th>
+                                            <th class="order-date">Brand</th>
+                                            <th class="order-status">Quantity</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        {% for inventory in InInventory %}
+                                        <tr>
+                                            <td class="order-id justify-content-center">#{{inventory[0]}}</td>
+                                            <td class="order-date">{{inventory[1][:30]}}</td>
+                                            <td class="order-date">{{inventory[2]}}</td>
+                                            <td class="product-quantity">{{inventory[3]}}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="tab-pane mb-4" id="account-products">
+                                <div class="icon-box icon-box-side icon-box-light">
+                                    <span class="icon-box-icon icon-products">
+                                        <i class="w-icon-products"></i>
+                                    </span>
+                                    <div class="icon-box-content">
+                                        <h4 class="icon-box-title text-capitalize ls-normal mb-0">Products</h4>
+                                    </div>
+                                    ({% if Products | length > 0 %}
+                                        {% if Products[0][1]  == 1 %}
+                                            Clothes
+                                        {% elif Products[0][1]  == 2 %}
+                                            Footwear
+                                        {% else %}
+                                            E-Appliances
+                                        {% endif %}
+                                    {% else %}
+                                        No Products
+                                    {% endif %})
+
+                                </div>
+
+                                <table class="shop-table account-orders-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="order-id">Product ID</th>
+                                            <th class="order-date">Name</th>
+                                            <th class="order-date">Brand</th>
+                                            <th class="order-action">Disc. Price</th>
+                                            <th class="order-status">Discount</th>
+                                            <th class="order-action">Price</th>
+                                            <th class="order-action">Remove</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        {% for product in Products %}
+                                        <tr>
+                                            <td class="order-id justify-content-center">#{{product[0]}}</td>
+                                            <td class="order-date">{{product[2][:30]}}...</td>
+                                            <td class="order-date">{{product[3]}}</td>
+                                            <td class="order-status">${{product[7]}}.00</td>
+                                            <td class="order-action">{{product[8]}}.00</td>
+                                            <td class="order-action">${{product[6]}}.00
+                                                <form action="/worker/updatePrice" method="post">
+                                                    <input type="number" name="price" size="1" min="1" value="{{product[6]}}" required>
+                                                    <input type="hidden" name="pdid" value="{{product[0]}}" readonly>
+                                                    <input type="hidden" name="catid" value="{{product[1]}}" readonly>
+                                                    <button type="submit" class="btn btn-sm btn-outline-primary">Update</button>
+                                                </form>
+                                            </td>
+                                            <td class="order-action">
+                                                <form action="/catHead/deleteProduct" method="post">
+                                                    <input type="hidden" name="pdid" value="{{product[0]}}" readonly>
+                                                    <button type="submit" class="btn btn-sm btn-outline-primary">Remove</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table><br>
+                            </div>
+
+                            <div class="tab-pane mb-4" id="account-employees">
+                                <div class="icon-box icon-box-side icon-box-light">
+                                    <span class="icon-box-icon icon-honour">
+                                        <i class="w-icon-honour"></i>
+                                    </span>
+                                    <div class="icon-box-content">
+                                        <h4 class="icon-box-title text-capitalize ls-normal mb-0">Employees</h4>
+                                    </div>
+                                </div>
+
+                                <table class="shop-table account-orders-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="order-id">Emp ID</th>
+                                            <th class="order-date">Name</th>
+                                            <th class="order-date">Phone</th>
+                                            <th class="order-status">AGE</th>
+                                            <th class="order-status">Salary</th>
+                                            <th class="order-actions">Remove</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        {% for employee in Employees %}
+                                        <tr>
+                                            <td class="order-id justify-content-center">#{{employee[0]}}</td>
+                                            <td class="order-date">{{employee[1]}} {{employee[2]}}</td>
+                                            <td class="order-date">{{employee[3]}}</td>
+                                            <td class="order-status">{{employee[4]}}</td>
+                                            <td>${{employee[5]}}.00
+                                                <form action="/CatHead/updateSalary" method="post">
+                                                    <input type="number" name="salary" size="4" min="8000" value="{{employee[5]}}">
+                                                    <input type="hidden" name="employee_id" value="{{employee[0]}}" readonly>
+                                                    <button type="submit" class="btn btn-sm btn-outline-primary">Update</button>
+                                                </form>
+                                            </td>
+                                            <td class="order-action">
+                                                <form action="/catHead/removeEmployee" method="post">
+                                                    <input type="hidden" class="form-control" name="employee_id" value="{{employee[0]}}" readonly>
+                                                    <button type="submit" class="btn btn-sm btn-outline-primary">Remove</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table><br>
+                            </div>
+
+                            <div class="tab-pane" id="account-addresses">
+                                <div class="icon-box icon-box-side icon-box-light">
+                                    <span class="icon-box-icon icon-map-marker">
+                                        <i class="w-icon-map-marker"></i>
+                                    </span>
+                                    <div class="icon-box-content">
+                                        <h4 class="icon-box-title mb-0 ls-normal">Addresses</h4>
+                                    </div>
+                                </div>
+                                <div class="tab-pane"></div>
+                                <div class="row">
+                                    <div class="col-sm-6 mb-6">
+                                        <div class="ecommerce-address billing-address pr-lg-8">
+                                            <h4 class="title title-underline ls-25 font-weight-bold">My Address</h4>
+                                            <address class="mb-4">
+                                                <table class="address-table">
+                                                    <tbody>
+                                                         <tr>
+                                                            <th>CatHead ID:</th>
+                                                            <td>{{CatHead[0]}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Name:</th>
+                                                            <td>{{CatHead[1]}} {{CatHead[2]}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Phone:</th>
+                                                            <td>{{CatHead[3]}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Email:</th>
+                                                            <td>{{CatHead[4]}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>House No:</th>
+                                                            <td>{{CatHead[8]}}</td>
+                                                        <tr>
+                                                            <th>Street:</th>
+                                                            <td>{{CatHead[9]}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>District:</th>
+                                                            <td>{{CatHead[10]}}</td>
+                                                        <tr>
+                                                            <th>City:</th>
+                                                            <td>{{CatHead[11]}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>State:</th>
+                                                            <td>{{CatHead[12]}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Postcode:</th>
+                                                            <td>{{CatHead[13]}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </address>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 mb-6">
+                                        <div class="ecommerce-address shipping-address pr-lg-8">
+                                            <h4 class="title title-underline ls-25 font-weight-bold">Inventory Address</h4>
+                                            <address class="mb-4">
+                                                <table class="address-table">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>Inventory ID:</th>
+                                                            <td>{{Inventory[0]}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>House No:</th>
+                                                            <td>{{Inventory[1]}}</td>
+                                                        <tr>
+                                                            <th>Street:</th>
+                                                            <td>{{Inventory[2]}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>District:</th>
+                                                            <td>{{Inventory[3]}}</td>
+                                                        <tr>
+                                                            <th>City:</th>
+                                                            <td>{{Inventory[4]}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>State:</th>
+                                                            <td>{{Inventory[5]}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Postcode:</th>
+                                                            <td>{{Inventory[6]}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </address>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane" id="account-details">
+                                <div class="icon-box icon-box-side icon-box-light">
+                                    <span class="icon-box-icon icon-account mr-2">
+                                        <i class="w-icon-user"></i>
+                                    </span>
+                                    <div class="icon-box-content">
+                                        <h4 class="icon-box-title mb-0 ls-normal">Account Details</h4>
+                                    </div>
+                                </div>
+                                <form class="form account-details-form" action="/catHead/update" method="post">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="firstname">CatHead ID *</label>
+                                                <input type="text" value="{{CatHead[0]}}"
+                                                    class="form-control form-control-md" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="firstname">Inventory ID *</label>
+                                                <input type="text" value="{{Inventory[0]}}"
+                                                    class="form-control form-control-md" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="firstname">First name *</label>
+                                                <input type="text" id="firstname" name="firstname" value="{{CatHead[1]}}"
+                                                    class="form-control form-control-md" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="lastname">Last name *</label>
+                                                <input type="text" id="lastname" name="lastname" value="{{CatHead[2]}}"
+                                                    class="form-control form-control-md" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="phone">Phone *</label>
+                                                <input type="text" id="phone" name="phone" value="{{CatHead[3]}}"
+                                                    class="form-control form-control-md">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="email">Email address *</label>
+                                                <input type="email" id="email" name="email" value="{{CatHead[4]}}"
+                                                    class="form-control form-control-md" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="dob">Date Of Birth *</label>
+                                                <input type="date" id="dob" name="birthdate" value="{{CatHead[5]}}"
+                                                    class="form-control form-control-md" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="gender">Gender *</label>
+                                                <input type="text" id="gender" name="gender" value="{{CatHead[7]}}"
+                                                    class="form-control form-control-md" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label >Salary *</label>
+                                                <input value="${{CatHead[14]}}.00"
+                                                    class="form-control form-control-md" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Experience *</label>
+                                                <input type="text" value="{{CatHead[15]}} Years"
+                                                    class="form-control form-control-md" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label >Speciality *</label>
+                                                <input type="text" value="{{CatHead[16]}}"
+                                                    class="form-control form-control-md" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label >Date of Joining *</label>
+                                                <input type="date" value="{{CatHead[17]}}"
+                                                    class="form-control form-control-md" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+
+<!--                                    address form start-->
+                                    <div class="icon-box icon-box-side icon-box-light">
+                                        <span class="icon-box-icon icon-map-marker">
+                                            <i class="w-icon-map-marker"></i>
+                                        </span>
+                                        <div class="icon-box-content">
+                                            <h4 class="icon-box-title mb-0 ls-normal">Address</h4>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="hno">House Number *</label>
+                                                <input type="number" id="hno" name="hno" value="{{CatHead[8]}}"
+                                                    class="form-control form-control-md mb-0" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="street">Street *</label>
+                                                <input type="text" id="street" name="street" value="{{CatHead[9]}}"
+                                                    class="form-control form-control-md-0" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="district">District *</label>
+                                                <input type="text" id="district" name="district" value="{{CatHead[10]}}"
+                                                    class="form-control form-control-md mb-0" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="city">City *</label>
+                                                <input type="text" id="city" name="city" value="{{CatHead[11]}}"
+                                                    class="form-control form-control-md mb-0" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="state">State *</label>
+                                                <input type="text" id="state" name="state" value="{{CatHead[12]}}"
+                                                    class="form-control form-control-md mb-0" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="postcode">Postcode *</label>
+                                                <input type="number" id="postcode" name="pincode" value="{{CatHead[13]}}"
+                                                    class="form-control form-control-md mb-0" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group mb-3"></div>
+
+                                    <button type="submit" class="btn btn-dark btn-rounded btn-sm mb-4">Save Changes</button>
+                                </form>
+                            </div>
+
+                            <div class="tab-pane" id="account-addEmployee">
+                                <div class="icon-box icon-box-side icon-box-light">
+                                    <span class="icon-box-icon icon-account mr-2">
+                                        <i class="w-icon-user"></i>
+                                    </span>
+                                    <div class="icon-box-content">
+                                        <h4 class="icon-box-title mb-0 ls-normal">Account Details</h4>
+                                    </div>
+                                </div>
+                                <span><br></span>
+                                <form class="form account-details-form" action="/catHead/addEmployee" method="post">
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="firstname">First name *</label>
+                                                <input type="text" id="firstname1" name="firstname" placeholder="Enter Firstname"
+                                                    class="form-control form-control-md" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="lastname">Last name *</label>
+                                                <input type="text" id="lastname1" name="lastname" placeholder="Enter Lastname"
+                                                    class="form-control form-control-md" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="phone">Phone *</label>
+                                                <input type="text" id="phone1" name="phone" placeholder="Enter Phone"
+                                                    class="form-control form-control-md">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="email">Email address *</label>
+                                                <input type="email" id="email1" name="email" placeholder="Enter Email"
+                                                    class="form-control form-control-md" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="dob">Date Of Birth *</label>
+                                                <input type="date" id="dob1" name="birthdate" placeholder="Enter Date Of Birth"
+                                                    class="form-control form-control-md" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="gender">Gender *</label>
+                                                <input type="text" id="gender1" name="gender" placeholder="Enter Gender"
+                                                    class="form-control form-control-md" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label >Salary *</label>
+                                                <input type="number" name="salary" min="8000" placeholder="Enter Salary"
+                                                    class="form-control form-control-md" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Experience *</label>
+                                                <input type="number" name="experience" placeholder="Enter Experience"
+                                                    class="form-control form-control-md" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+<!--                                    address form start-->
+                                    <div class="icon-box icon-box-side icon-box-light">
+                                        <span class="icon-box-icon icon-map-marker">
+                                            <i class="w-icon-map-marker"></i>
+                                        </span>
+                                        <div class="icon-box-content">
+                                            <h4 class="icon-box-title mb-0 ls-normal">Address</h4>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="hno1">House Number *</label>
+                                                <input type="number" id="hno1" name="hno" placeholder="Enter House No."
+                                                    class="form-control form-control-md mb-0" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="street1">Street *</label>
+                                                <input type="text" id="street1" name="street" placeholder="Enter Street"
+                                                    class="form-control form-control-md-0" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="district1">District *</label>
+                                                <input type="text" id="district1" name="district" placeholder="Enter District"
+                                                    class="form-control form-control-md mb-0" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="city1">City *</label>
+                                                <input type="text" id="city1" name="city" placeholder="Enter City"
+                                                    class="form-control form-control-md mb-0" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="state1">State *</label>
+                                                <input type="text" id="state1" name="state" placeholder="Enter State"
+                                                    class="form-control form-control-md mb-0" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="postcode1">Postcode *</label>
+                                                <input type="number" id="postcode1" name="pincode" placeholder="Enter Pincode"
+                                                    class="form-control form-control-md mb-0" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group mb-3"></div>
+
+                                    <button type="submit" class="btn btn-dark btn-rounded btn-sm mb-4">Save Changes</button>
+                                </form>
+                            </div>
+
+                            <div class="tab-pane" id="account-addProduct">
+                                <div class="icon-box icon-box-side icon-box-light">
+                                    <span class="icon-box-icon icon-account mr-2">
+                                        <i class="w-icon-products"></i>
+                                    </span>
+                                    <div class="icon-box-content">
+                                        <h4 class="icon-box-title mb-0 ls-normal">Product Details</h4>
+                                    </div>
+                                </div>
+                                <span><br></span>
+                                <form class="form account-details-form" action="/catHead/addProduct" method="post">
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="name">Name *</label>
+                                                <input type="text" id="name" name="name" placeholder="Enter Name"
+                                                    class="form-control form-control-md">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="brand">Brand *</label>
+                                                <input type="text" id="brand" name="brand" placeholder="Enter Brand"
+                                                    class="form-control form-control-md" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="gender">Type *</label>
+                                                <input type="text" id="type" name="type" placeholder="Enter Type"
+                                                    class="form-control form-control-md" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label >Cost Price *</label>
+                                                <input type="number" name="costPrice" min="20" placeholder="Enter Cost Price"
+                                                    class="form-control form-control-md" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Rating *</label>
+                                                <input type="number" name="rating" min="1" max="5" placeholder="Enter Rating"
+                                                    class="form-control form-control-md" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+<!--                                    ExtraAttributes form start-->
+                                    <div class="icon-box icon-box-side icon-box-light">
+                                        <span class="icon-box-icon icon-map-marker">
+                                            <i class="w-icon-map-plus"></i>
+                                        </span>
+                                        <div class="icon-box-content">
+                                            <h4 class="icon-box-title mb-0 ls-normal">Extra Attributes</h4>
+                                        </div>
+                                    </div>
+                                    {% if CatHead[19] == 1 %}
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="color">Color *</label>
+                                                    <input type="text" id="color" name="color" placeholder="Enter Color"
+                                                        class="form-control form-control-md mb-0" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="gender">Gender *</label>
+                                                    <input type="text" id="gndner" name="gender" placeholder="Enter Gender"
+                                                        class="form-control form-control-md-0" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="size">Size *</label>
+                                                    <input type="text" id="size" name="size" placeholder="Enter Size"
+                                                        class="form-control form-control-md mb-0" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="quantity">Quantity *</label>
+                                                    <input type="number" id="quantity" name="quantity" placeholder="Enter Quantity"
+                                                        class="form-control form-control-md mb-0" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% elif CatHead[19] == 2 %}
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="color1">Color *</label>
+                                                    <input type="text" id="color1" name="color" placeholder="Enter Color"
+                                                        class="form-control form-control-md mb-0" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="gender1">Gender *</label>
+                                                    <input type="text" id="gndner1" name="gender" placeholder="Enter Gender"
+                                                        class="form-control form-control-md-0" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="size1">Size *</label>
+                                                    <input type="number" id="size1" name="size" placeholder="Enter Size"
+                                                        class="form-control form-control-md mb-0" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="quantity1">Quantity *</label>
+                                                    <input type="number" id="quantity1" name="quantity" placeholder="Enter Quantity"
+                                                        class="form-control form-control-md mb-0" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% else %}
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="date">Manufacturing Date *</label>
+                                                    <input type="date" id="date" name="mfg" placeholder="Enter Mfg. Date"
+                                                        class="form-control form-control-md mb-0" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="quantity3">Quantity *</label>
+                                                    <input type="number" id="quantity3" name="quantity" placeholder="Enter Quantity"
+                                                        class="form-control form-control-md mb-0" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                    <div class="form-group mb-3"></div>
+                                    <button type="submit" class="btn btn-dark btn-rounded btn-sm mb-4">ADD PRODUCT</button>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End of PageContent -->
+        </main>
+        <!-- End of Main -->
+
+        <!-- Start of Footer -->
+        <footer class="footer appear-animate" data-animation-options="{
+            'name': 'fadeIn'
+        }">
+            <div class="footer-newsletter bg-primary pt-6 pb-6">
+                <div class="container">
+                    <div class="row justify-content-center align-items-center">
+                    </div>
+                </div>
+            </div>
+            <div class="container">`
+                <div class="footer-top">
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="widget widget-about">
+                                <a href="/" class="logo-footer">
+                                    <img src="assets/images/logo_footer.png" alt="logo-footer" width="144"
+                                        height="45" />
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <div class="footer-left">
+                        <p class="copyright">Copyright © 2021 JPAS Store. All Rights Reserved.</p>
+                    </div>
+                    <div class="footer-right">
+                        <span class="payment-label mr-lg-8">We're using safe payment for</span>
+                        <p class="copyright">UPI and COD.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+    </div>
+    <!-- End of Page-wrapper-->
+
+    <!-- Start of Scroll Top -->
+    <a id="scroll-top" class="scroll-top" href="#top" title="Top" role="button"> <i class="w-icon-angle-up"></i> <svg
+            version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 70">
+            <circle id="progress-indicator" fill="transparent" stroke="#000000" stroke-miterlimit="10" cx="35" cy="35"
+                r="34" style="stroke-dasharray: 16.4198, 400;"></circle>
+        </svg> </a>
+    <!-- End of Scroll Top -->
+
+    <!-- Start of Quick View -->
+    <div class="product product-single product-popup">
+        <div class="row gutter-lg">
+            <div class="col-md-6 mb-4 mb-md-0">
+                <div class="product-gallery product-gallery-sticky">
+                    <div class="swiper-container product-single-swiper swiper-theme nav-inner">
+                        <div class="swiper-wrapper row cols-1 gutter-no">
+                            <div class="swiper-slide">
+                                <figure class="product-image">
+                                    <img src="assets/images/products/popup/1-440x494.jpg"
+                                        data-zoom-image="assets/images/products/popup/1-800x900.jpg"
+                                        alt="Water Boil Black Utensil" width="800" height="900">
+                                </figure>
+                            </div>
+                            <div class="swiper-slide">
+                                <figure class="product-image">
+                                    <img src="assets/images/products/popup/2-440x494.jpg"
+                                        data-zoom-image="assets/images/products/popup/2-800x900.jpg"
+                                        alt="Water Boil Black Utensil" width="800" height="900">
+                                </figure>
+                            </div>
+                            <div class="swiper-slide">
+                                <figure class="product-image">
+                                    <img src="assets/images/products/popup/3-440x494.jpg"
+                                        data-zoom-image="assets/images/products/popup/3-800x900.jpg"
+                                        alt="Water Boil Black Utensil" width="800" height="900">
+                                </figure>
+                            </div>
+                            <div class="swiper-slide">
+                                <figure class="product-image">
+                                    <img src="assets/images/products/popup/4-440x494.jpg"
+                                        data-zoom-image="assets/images/products/popup/4-800x900.jpg"
+                                        alt="Water Boil Black Utensil" width="800" height="900">
+                                </figure>
+                            </div>
+                        </div>
+                        <button class="swiper-button-next"></button>
+                        <button class="swiper-button-prev"></button>
+                    </div>
+                    <div class="product-thumbs-wrap swiper-container" data-swiper-options="{
+                        'navigation': {
+                            'nextEl': '.swiper-button-next',
+                            'prevEl': '.swiper-button-prev'
+                        }
+                    }">
+                        <div class="product-thumbs swiper-wrapper row cols-4 gutter-sm">
+                            <div class="product-thumb swiper-slide">
+                                <img src="assets/images/products/popup/1-103x116.jpg" alt="Product Thumb" width="103"
+                                    height="116">
+                            </div>
+                            <div class="product-thumb swiper-slide">
+                                <img src="assets/images/products/popup/2-103x116.jpg" alt="Product Thumb" width="103"
+                                    height="116">
+                            </div>
+                            <div class="product-thumb swiper-slide">
+                                <img src="assets/images/products/popup/3-103x116.jpg" alt="Product Thumb" width="103"
+                                    height="116">
+                            </div>
+                            <div class="product-thumb swiper-slide">
+                                <img src="assets/images/products/popup/4-103x116.jpg" alt="Product Thumb" width="103"
+                                    height="116">
+                            </div>
+                        </div>
+                        <button class="swiper-button-next"></button>
+                        <button class="swiper-button-prev"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 overflow-hidden p-relative">
+                <div class="product-details scrollable pl-0">
+                    <h2 class="product-title">Electronics Black Wrist Watch</h2>
+                    <div class="product-bm-wrapper">
+                        <figure class="brand">
+                            <img src="assets/images/products/brand/brand-1.jpg" alt="Brand" width="102" height="48" />
+                        </figure>
+                        <div class="product-meta">
+                            <div class="product-categories">
+                                Category:
+                                <span class="product-category"><a href="#">Electronics</a></span>
+                            </div>
+                            <div class="product-sku">
+                                SKU: <span>MS46891340</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="product-divider">
+
+                    <div class="product-price">$40.00</div>
+
+                    <div class="ratings-container">
+                        <div class="ratings-full">
+                            <span class="ratings" style="width: 80%;"></span>
+                            <span class="tooltiptext tooltip-top"></span>
+                        </div>
+                        <a href="#" class="rating-reviews">(3 Reviews)</a>
+                    </div>
+
+                    <div class="product-short-desc">
+                        <ul class="list-type-check list-style-none">
+                            <li>Ultrices eros in cursus turpis massa cursus mattis.</li>
+                            <li>Volutpat ac tincidunt vitae semper quis lectus.</li>
+                            <li>Aliquam id diam maecenas ultricies mi eget mauris.</li>
+                        </ul>
+                    </div>
+
+                    <hr class="product-divider">
+
+                    <div class="product-form product-variation-form product-color-swatch">
+                        <label>Color:</label>
+                        <div class="d-flex align-items-center product-variations">
+                            <a href="#" class="color" style="background-color: #ffcc01"></a>
+                            <a href="#" class="color" style="background-color: #ca6d00;"></a>
+                            <a href="#" class="color" style="background-color: #1c93cb;"></a>
+                            <a href="#" class="color" style="background-color: #ccc;"></a>
+                            <a href="#" class="color" style="background-color: #333;"></a>
+                        </div>
+                    </div>
+                    <div class="product-form product-variation-form product-size-swatch">
+                        <label class="mb-1">Size:</label>
+                        <div class="flex-wrap d-flex align-items-center product-variations">
+                            <a href="#" class="size">Small</a>
+                            <a href="#" class="size">Medium</a>
+                            <a href="#" class="size">Large</a>
+                            <a href="#" class="size">Extra Large</a>
+                        </div>
+                        <a href="#" class="product-variation-clean">Clean All</a>
+                    </div>
+
+                    <div class="product-variation-price">
+                        <span></span>
+                    </div>
+
+                    <div class="product-form">
+                        <div class="product-qty-form">
+                            <div class="input-group">
+                                <input class="quantity form-control" type="number" min="1" max="10000000">
+                                <button class="quantity-plus w-icon-plus"></button>
+                                <button class="quantity-minus w-icon-minus"></button>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary btn-cart">
+                            <i class="w-icon-cart"></i>
+                            <span>Add to Cart</span>
+                        </button>
+                    </div>
+
+                    <div class="social-links-wrapper">
+                        <div class="social-links">
+                            <div class="social-icons social-no-color border-thin">
+                                <a href="#" class="social-icon social-facebook w-icon-facebook"></a>
+                                <a href="#" class="social-icon social-twitter w-icon-twitter"></a>
+                                <a href="#" class="social-icon social-pinterest fab fa-pinterest-p"></a>
+                                <a href="#" class="social-icon social-whatsapp fab fa-whatsapp"></a>
+                                <a href="#" class="social-icon social-youtube fab fa-linkedin-in"></a>
+                            </div>
+                        </div>
+                        <span class="divider d-xs-show"></span>
+                        <div class="product-link-wrapper d-flex">
+                            <a href="#" class="btn-product-icon btn-wishlist w-icon-heart"><span></span></a>
+                            <a href="#"
+                                class="btn-product-icon btn-compare btn-icon-left w-icon-compare"><span></span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of Quick view -->
+
+    <!-- Plugin JS File -->
+    <script src="assets/vendor/jquery/jquery.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="assets/js/main.min.js"></script>
+</body>
+
+
+<!-- Mirrored from portotheme.com/html/wolmart/CatHead.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Apr 2022 07:14:34 GMT -->
+</html>

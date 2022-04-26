@@ -27,14 +27,13 @@ def execute(query):
 
 @auth.route('/', methods=['GET', 'POST'])
 def index():
-    if 'user' in session and session['user']:
+    if 'user' in session and session['user'] and session['user'][1] == 'customer':
         return redirect('/store')
     return render_template('login.html')
 
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
-
     if request.method == "POST":
         loginid = request.form.get('LoginID')
         password = request.form.get('Password')
@@ -60,7 +59,8 @@ def login():
 
 @auth.route("/logout")
 def logout():
-    session.pop('user')
+    if 'user' in session and session['user']:
+        session.pop('user')
     return redirect('/')
 
 

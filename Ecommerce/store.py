@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, session, request, redirect, flash
-import mysql.connector as sql
+from mysql import connector as sql
 import random
 
 store = Blueprint('store', __name__, url_prefix='/store', template_folder='templates_store',

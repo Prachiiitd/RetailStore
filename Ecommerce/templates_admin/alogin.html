@@ -110,19 +110,32 @@
                         <div class="tab tab-nav-boxed tab-nav-center tab-nav-underline">
                             <ul class="nav nav-tabs text-uppercase" role="tablist">
                                 <li class="nav-item">
-                                    <a href="/sign-in" class="nav-link active">Customer  Sign In</a>
+                                    <a href="/sign-in" class="nav-link active">Admin Sign In</a>
                                 </li>
                             </ul>
                             <div class="tab-content">
-                                <form action="/auth/login" class="tab-pane fade show active" id="sign-in" method="post">
+                                <form action="/adAuth/login" class="tab-pane fade show active" id="sign-in" method="post">
                                     <div class="form-group">
                                         <label for="LoginId">LoginID</label>
-                                        <input type="Number" class="form-control" id="LoginId" name="LoginID" placeholder="Enter your Customer LoginID">
+                                        <input type="Number" class="form-control" id="LoginId" name="LoginID" placeholder="Enter your LoginID">
                                     </div>
                                     <div class="form-group">
                                         <label for="password">Password</label>
                                         <input type="password" class="form-control" id="password" name="Password" placeholder="Enter your password">
                                     </div>
+
+                                    <div>
+                                        <div class="custom-control ">
+                                            <input class="form-check-input" type="radio" id="remember-check1" name="UserType" value="manager" checked>
+                                            <label class="form-check-label" for="remember-check1">Manager</label>
+
+                                        </div>
+                                        <div class="custom-control ">
+                                            <input class="form-check-input" type="radio" id="remember-check2" name="UserType" value="employee">
+                                            <label class="form-check-label" for="remember-check2">Employee</label>
+                                        </div>
+                                    </div>
+                                    <br>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary btn-block">Sign In</button>
                                     </div>
@@ -165,82 +178,7 @@
 
                     </div>
                 </div>
-                <div class="footer-middle">
-                    <div class="widget widget-category">
-                        <div class="category-box">
-                            <h6 class="category-name">Consumer Electric:</h6>
-                            <a href="/">TV Television</a>
-                            <a href="/">Air Condition</a>
-                            <a href="/">Refrigerator</a>
-                            <a href="/">Washing Machine</a>
-                            <a href="/">Audio Speaker</a>
-                            <a href="/">Security Camera</a>
-                            <a href="/">View All</a>
-                        </div>
-                        <div class="category-box">
-                            <h6 class="category-name">Clothing & Apparel:</h6>
-                            <a href="/">Men's T-shirt</a>
-                            <a href="/">Dresses</a>
-                            <a href="/">Men's Sneacker</a>
-                            <a href="/">Leather Backpack</a>
-                            <a href="/">Watches</a>
-                            <a href="/">Jeans</a>
-                            <a href="/">Sunglasses</a>
-                            <a href="/">Boots</a>
-                            <a href="/">Rayban</a>
-                            <a href="/">Acccessories</a>
-                        </div>
-                        <div class="category-box">
-                            <h6 class="category-name">Home, Garden & Kitchen:</h6>
-                            <a href="/">Sofa</a>
-                            <a href="/">Chair</a>
-                            <a href="/">Bed Room</a>
-                            <a href="/">Living Room</a>
-                            <a href="/">Cookware</a>
-                            <a href="/">Utensil</a>
-                            <a href="/">Blender</a>
-                            <a href="/">Garden Equipments</a>
-                            <a href="/">Decor</a>
-                            <a href="/">Library</a>
-                        </div>
-                        <div class="category-box">
-                            <h6 class="category-name">Health & Beauty:</h6>
-                            <a href="/">Skin Care</a>
-                            <a href="/">Body Shower</a>
-                            <a href="/">Makeup</a>
-                            <a href="/">Hair Care</a>
-                            <a href="/">Lipstick</a>
-                            <a href="/">Perfume</a>
-                            <a href="/">View all</a>
-                        </div>
-                        <div class="category-box">
-                            <h6 class="category-name">Jewelry & Watches:</h6>
-                            <a href="/">Necklace</a>
-                            <a href="/">Pendant</a>
-                            <a href="/">Diamond Ring</a>
-                            <a href="/">Silver Earing</a>
-                            <a href="/">Leather Watcher</a>
-                            <a href="/">Rolex</a>
-                            <a href="/">Gucci</a>
-                            <a href="/">Australian Opal</a>
-                            <a href="/">Ammolite</a>
-                            <a href="/">Sun Pyrite</a>
-                        </div>
-                        <div class="category-box">
-                            <h6 class="category-name">Computer & Technologies:</h6>
-                            <a href="/">Laptop</a>
-                            <a href="/">iMac</a>
-                            <a href="/">Smartphone</a>
-                            <a href="/">Tablet</a>
-                            <a href="/">Apple</a>
-                            <a href="/">Asus</a>
-                            <a href="/">Drone</a>
-                            <a href="/">Wireless Speaker</a>
-                            <a href="/">Game Controller</a>
-                            <a href="/">View all</a>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="footer-bottom">
                     <div class="footer-left">
                         <p class="copyright">Copyright © 2021 JPAS Store. All Rights Reserved.</p>

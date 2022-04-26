@@ -2,7 +2,7 @@
 <html lang="en">
 
 
-<!-- Mirrored from portotheme.com/html/wolmart/manager.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Apr 2022 07:14:32 GMT -->
+<!-- Mirrored from portotheme.com/html/wolmart/Person.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Apr 2022 07:14:32 GMT -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
@@ -80,95 +80,6 @@
                         <a href="/" class="logo ml-lg-0">
                             <img src="assets/images/logo.png" alt="logo" width="144" height="45" />
                         </a>
-                        <form method="get" action="#"
-                            class="header-search hs-expanded hs-round d-none d-md-flex input-wrapper">
-                            <div class="select-box">
-                                <select id="category" name="category">
-                                    <option value="">All Categories</option>
-                                    <option value="4">Clothing</option>
-                                    <option value="5">E-Appliances</option>
-                                    <option value="6">Footwear</option>
-                                </select>
-                            </div>
-                            <input type="text" class="form-control" name="search" id="search" placeholder="Search in..."
-                                required />
-                            <button class="btn btn-search" type="submit"><i class="w-icon-search"></i>
-                            </button>
-                        </form>
-                    </div>
-                    <div class="header-right ml-4">
-                        <div class="dropdown cart-dropdown cart-offcanvas mr-0 mr-lg-2">
-                            <div class="cart-overlay"></div>
-                            <a href="/user/cart" class="cart-toggle label-down link">
-                                <i class="w-icon-cart">
-                                    <span class="cart-count">{{Cart|length}}</span>
-                                </i>
-                                <span class="cart-label">Cart</span>
-                            </a>
-                            <div class="dropdown-box">
-                                <div class="cart-header">
-                                    <span>Shopping Cart</span>
-                                    <a href="#" class="btn-close">Close<i class="w-icon-long-arrow-right"></i></a>
-                                </div>
-                                {% if Cart|length > 0 %}
-                                    <div class="products">
-                                        {% for item in Cart %}
-                                            <div class="product product-cart">
-                                                <div class="product-detail">
-                                                    <a href="/store/product{{item[0]}}" class="product-name">{{item[5]}}</a>
-                                                    <div class="price-box">
-                                                        <span class="product-quantity">{{item[1]}}</span>
-                                                        <span class="product-price">${{item[6]}}.00</span>
-                                                    </div>
-                                                </div>
-                                                <figure class="product-media">
-                                                    {% if item[7] == 1 %}
-                                                        <img src="assets/images/store/cart/1.jpg" alt="Product Image" />
-                                                    {% elif item[7] == 2 %}
-                                                        <img src="assets/images/store/cart/2.jpg" alt="Product Image" />
-                                                    {% else %}
-                                                        <img src="assets/images/store/cart/3.jpg" alt="product" height="84"
-                                                            width="94" />
-                                                    {% endif %}
-                                                </figure>
-                                                <form method="post" action="/user/cartremove">
-                                                    <input type="hidden" name="pdid" value="{{item[0]}}">
-                                                    <input type="hidden" name="quantity" value="{{item[1]}}">
-                                                    <input type="hidden" name="attr" value="{{item[3]}}">
-                                                    <input type="hidden" name="placed" value="{{item[4]}}">
-
-                                                    <button type="submit" class="btn btn-link btn-close" aria-label="button">
-                                                        <i class="fas fa-times"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        {% endfor %}
-                                        <div class="cart-total cart-detail ">
-                                            <label>Total:</label>
-                                            <span class="price">${{CartTotal}}.00</span>
-                                        </div>
-
-                                        <div class="cart-action">
-                                            <a href="/user/cart" class="btn btn-dark btn-outline btn-rounded">View Cart</a>
-                                            <a href="/user/checkout" class="btn btn-primary  btn-rounded">Checkout</a>
-                                        </div>
-                                    </div>
-                                {% else %}
-                                    <div class="product product-cart">
-                                        <div class="product-detail">
-                                            <a class="product-name">
-                                                Your cart is currently empty
-                                            </a>
-                                            <div class="price-box">
-                                                <span class="product-quantity">Add to cart</span>
-                                                <span class="product-price">Have your cart filled</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endif %}
-                            </div>
-                            <!-- End of Dropdown Box -->
-                        </div>
                     </div>
                 </div>
             </div>
@@ -182,7 +93,7 @@
             <!-- Start of Page Header -->
             <div class="page-header">
                 <div class="container">
-                    <h1 class="page-title mb-0">My Account</h1>
+                    <h1 class="page-title mb-0">Delivery Person Account</h1><br>
                 </div>
             </div>
             <!-- End of Page Header -->
@@ -191,8 +102,7 @@
             <nav class="breadcrumb-nav">
                 <div class="container">
                     <ul class="breadcrumb">
-                        <li><a href="/">Home</a></li>
-                        <li>My account</li>
+                        <li>Delivery Person Home</li>
                     </ul>
                 </div>
             </nav>
@@ -221,9 +131,8 @@
                                 <a href="#account-dashboard" id="#dashboard" class="nav-link active">Dashboard</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#account-orders" class="nav-link">Orders</a>
+                                <a href="#account-shipping" class="nav-link">Shipping</a>
                             </li>
-
                             <li class="nav-item">
                                 <a href="#account-addresses" class="nav-link">Addresses</a>
                             </li>
@@ -231,7 +140,7 @@
                                 <a href="#account-details" class="nav-link">Account details</a>
                             </li>
                             <li class="link-item">
-                                <a href="/auth/logout">Logout</a>
+                                <a href="/adAuth/logout">Logout</a>
                             </li>
                         </ul>
 
@@ -239,30 +148,22 @@
                             <div class="tab-pane active in" id="account-dashboard">
                                 <p class="greeting">
                                     Hello
-                                    <span class="text-dark font-weight-bold">{{Customer[1]}} {{Customer[2]}}</span>
+                                    <span class="text-dark font-weight-bold">{{Person[1]}} {{Person[2]}}</span>
                                     (not
-                                    <span class="text-dark font-weight-bold">{{Customer[1]}} {{Customer[2]}}</span>?
-                                    <a href="/auth/logout" class="text-primary">Log out</a>)
-                                </p>
+                                    <span class="text-dark font-weight-bold">{{Person[1]}} {{Person[2]}}</span>?
+                                    <a href="/adAuth/logout" class="text-primary">Log out</a>)
+                                </p><br>
 
-                                <p class="mb-4">
-                                    From your account dashboard you can view your <a href="#account-orders"
-                                        class="text-primary link-to-tab">recent orders</a>,
-                                    view your <a href="#account-addresses" class="text-primary link-to-tab">shipping
-                                        and billing addresses</a>, and
-                                    <a href="#account-details" class="text-primary link-to-tab">edit your
-                                        account details.</a>
-                                </p>
 
                                 <div class="row">
                                     <div class="col-lg-4 col-md-6 col-sm-4 col-xs-6 mb-4">
-                                        <a href="#account-orders" class="link-to-tab">
+                                        <a href="#account-shipping" class="link-to-tab">
                                             <div class="icon-box text-center">
-                                                <span class="icon-box-icon icon-orders">
-                                                    <i class="w-icon-orders"></i>
+                                                <span class="icon-box-icon icon-shipping">
+                                                    <i class="w-icon-shipping"></i>
                                                 </span>
                                                 <div class="icon-box-content">
-                                                    <p class="text-uppercase mb-0">Orders</p>
+                                                    <p class="text-uppercase mb-0">Shipping</p>
                                                 </div>
                                             </div>
                                         </a>
@@ -274,7 +175,7 @@
                                                     <i class="w-icon-map-marker"></i>
                                                 </span>
                                                 <div class="icon-box-content">
-                                                    <p class="text-uppercase mb-0">Addresses</p>
+                                                    <p class="text-uppercase mb-0">Address</p>
                                                 </div>
                                             </div>
                                         </a>
@@ -291,7 +192,6 @@
                                             </div>
                                         </a>
                                     </div>
-
                                     <div class="col-lg-4 col-md-6 col-sm-4 col-xs-6 mb-4">
                                         <a href="/auth/logout">
                                             <div class="icon-box text-center">
@@ -307,25 +207,26 @@
                                 </div>
                             </div>
 
-                            <div class="tab-pane mb-4" id="account-orders">
+                            <div class="tab-pane mb-4" id="account-shipping">
                                 <div class="icon-box icon-box-side icon-box-light">
-                                    <span class="icon-box-icon icon-orders">
-                                        <i class="w-icon-orders"></i>
+                                    <span class="icon-box-icon icon-shipping">
+                                        <i class="w-icon-shipping"></i>
                                     </span>
                                     <div class="icon-box-content">
-                                        <h4 class="icon-box-title text-capitalize ls-normal mb-0">Orders</h4>
+                                        <h4 class="icon-box-title text-capitalize ls-normal mb-0">Shipping</h4>
                                     </div>
                                 </div>
 
                                 <table class="shop-table account-orders-table mb-7">
                                     <thead>
                                         <tr>
-                                            <th class="order-id">OrderID</th>
-                                            <th class="order-date">Placed</th>
-                                            <th class="order-date">Delivered</th>
-                                            <th class="order-status">Status</th>
-                                            <th class="order-total">Total</th>
-                                            <th class="order-actions">Actions</th>
+                                            <th class="order-id">Order ID</th>
+                                            <th class="order-name">Name</th>
+                                            <th class="order-date">Place Date</th>
+                                            <th class="order-date">Delivery Date</th>
+                                            <th class="order-price">Total Cost</th>
+                                            <th class="order-address">Address</th>
+                                            <th class="order-status order-action">Status</th>
                                         </tr>
                                     </thead>
 
@@ -333,28 +234,31 @@
                                         {% for order in Orders %}
                                         <tr>
                                             <td class="order-id justify-content-center">#{{order[0]}}</td>
+                                            <td class="order-name">{{order[6]}} {{order[7]}}</td>
+                                            <td class="order-date">{{order[1]}}</td>
                                             <td class="order-date">{{order[2]}}</td>
-                                            <td class="order-date">{{order[3]}}</td>
-                                            {% if order[4] == 1 %}
-                                                <td class="order-status">Delivered</td>
-                                                {% else %}
-                                                <td class="order-status">Pending</td>
-                                            {% endif %}
-                                            <td class="order-total">
-                                                <span class="order-price">${{order[5]}}</span>
+                                            <td class="order-price">{{order[4]}}</td>
+                                            <td class="order-address">
+                                                <a href="#order-address{{order[5]}}" class="link-to-tab">Address</a>
                                             </td>
-                                            <td class="order-action">
-                                                <a href="/user/order{{order[0]}}" class="btn btn-sm btn-outline-primary">View</a>
+                                            <td class="order-status">
+                                                {% if order[3] == 1 %}
+                                                <span class="badge badge-success">Delivered</span>
+                                                {% else %}
+                                                <span class="badge badge-danger">
+                                                    Not Delivered
+                                                    <form action="/deliveryPerson/changeStatus" method="post">
+                                                        <input type="hidden" name="cordid" value="{{order[0]}}" readonly>
+                                                        <button type="submit" class="btn btn-sm btn-outline-primary">Punch</button>
+                                                    </form>
+                                                </span>
+                                                {% endif %}
                                             </td>
                                         </tr>
                                         {% endfor %}
                                     </tbody>
                                 </table>
-
-                                <a href="/" class="btn btn-dark btn-rounded btn-icon-right">Go
-                                    Shop<i class="w-icon-long-arrow-right"></i></a>
                             </div>
-
 
                             <div class="tab-pane" id="account-addresses">
                                 <div class="icon-box icon-box-side icon-box-light">
@@ -365,103 +269,55 @@
                                         <h4 class="icon-box-title mb-0 ls-normal">Addresses</h4>
                                     </div>
                                 </div>
-                                <p>The following addresses will be used on the checkout page
-                                    by default.</p>
+                                <div class="tab-pane"></div>
                                 <div class="row">
                                     <div class="col-sm-6 mb-6">
                                         <div class="ecommerce-address billing-address pr-lg-8">
-                                            <h4 class="title title-underline ls-25 font-weight-bold">Billing Address</h4>
+                                            <h4 class="title title-underline ls-25 font-weight-bold">My Address</h4>
                                             <address class="mb-4">
                                                 <table class="address-table">
                                                     <tbody>
+                                                         <tr>
+                                                            <th>Person ID:</th>
+                                                            <td>{{Person[0]}}</td>
+                                                        </tr>
                                                         <tr>
                                                             <th>Name:</th>
-                                                            <td>{{Customer[1]}} {{Customer[2]}}</td>
+                                                            <td>{{Person[1]}} {{Person[2]}}</td>
                                                         </tr>
                                                         <tr>
                                                             <th>Phone:</th>
-                                                            <td>{{Customer[3]}}</td>
+                                                            <td>{{Person[3]}}</td>
                                                         </tr>
                                                         <tr>
                                                             <th>Email:</th>
-                                                            <td>{{Customer[4]}}</td>
+                                                            <td>{{Person[4]}}</td>
                                                         </tr>
                                                         <tr>
                                                             <th>House No:</th>
-                                                            <td>{{Customer[8]}}</td>
+                                                            <td>{{Person[8]}}</td>
                                                         <tr>
                                                             <th>Street:</th>
-                                                            <td>{{Customer[9]}}</td>
+                                                            <td>{{Person[9]}}</td>
                                                         </tr>
                                                         <tr>
                                                             <th>District:</th>
-                                                            <td>{{Customer[10]}}</td>
+                                                            <td>{{Person[10]}}</td>
                                                         <tr>
                                                             <th>City:</th>
-                                                            <td>{{Customer[11]}}</td>
+                                                            <td>{{Person[11]}}</td>
                                                         </tr>
                                                         <tr>
                                                             <th>State:</th>
-                                                            <td>{{Customer[12]}}</td>
+                                                            <td>{{Person[12]}}</td>
                                                         </tr>
                                                         <tr>
                                                             <th>Postcode:</th>
-                                                            <td>{{Customer[13]}}</td>
+                                                            <td>{{Person[13]}}</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
                                             </address>
-                                            <a href="#"
-                                                class="btn btn-link btn-underline btn-icon-right text-primary">Edit
-                                                your address<i class="w-icon-long-arrow-right"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 mb-6">
-                                        <div class="ecommerce-address shipping-address pr-lg-8">
-                                            <h4 class="title title-underline ls-25 font-weight-bold">Shipping Address</h4>
-                                            <address class="mb-4">
-                                                <table class="address-table">
-                                                    <tbody>
-                                                        <tr>
-                                                            <th>Name:</th>
-                                                            <td>{{Customer[1]}} {{Customer[2]}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Phone:</th>
-                                                            <td>{{Customer[3]}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Email:</th>
-                                                            <td>{{Customer[4]}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>House No:</th>
-                                                            <td>{{Customer[8]}}</td>
-                                                        <tr>
-                                                            <th>Street:</th>
-                                                            <td>{{Customer[9]}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>District:</th>
-                                                            <td>{{Customer[10]}}</td>
-                                                        <tr>
-                                                            <th>City:</th>
-                                                            <td>{{Customer[11]}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>State:</th>
-                                                            <td>{{Customer[12]}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Postcode:</th>
-                                                            <td>{{Customer[13]}}</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </address>
-                                            <a href="#"
-                                                class="btn btn-link btn-underline btn-icon-right text-primary">Edit your
-                                                address<i class="w-icon-long-arrow-right"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -476,19 +332,29 @@
                                         <h4 class="icon-box-title mb-0 ls-normal">Account Details</h4>
                                     </div>
                                 </div>
-                                <form class="form account-details-form" action="/user/update" method="post">
+                                <form class="form account-details-form" action="/deliveryPerson/update" method="post">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="firstname">Delivery Person ID *</label>
+                                                <input type="text" value="{{Person[0]}}"
+                                                    class="form-control form-control-md" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="firstname">First name *</label>
-                                                <input type="text" id="firstname" name="firstname" value="{{Customer[1]}}"
+                                                <input type="text" id="firstname" name="firstname" value="{{Person[1]}}"
                                                     class="form-control form-control-md" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="lastname">Last name *</label>
-                                                <input type="text" id="lastname" name="lastname" value="{{Customer[2]}}"
+                                                <input type="text" id="lastname" name="lastname" value="{{Person[2]}}"
                                                     class="form-control form-control-md" required>
                                             </div>
                                         </div>
@@ -498,15 +364,15 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="phone">Phone *</label>
-                                                <input type="text" id="phone" name="phone" value="{{Customer[3]}}"
+                                                <input type="text" id="phone" name="phone" value="{{Person[3]}}"
                                                     class="form-control form-control-md">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="email">Email address *</label>
-                                                <input type="email" id="email" name="email" value="{{Customer[4]}}"
-                                                    class="form-control form-control-md" required>
+                                                <input type="email" id="email" name="email" value="{{Person[4]}}"
+                                                    class="form-control form-control-md" readonly>
                                             </div>
                                         </div>
                                     </div>
@@ -514,16 +380,48 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="gender">Gender *</label>
-                                                <input type="text" id="gender" name="gender" value="{{Customer[5]}}"
+                                                <label for="dob">Date Of Birth *</label>
+                                                <input type="date" id="dob" name="birthdate" value="{{Person[5]}}"
                                                     class="form-control form-control-md" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="dob">Date Of Birth *</label>
-                                                <input type="date" id="dob" name="birthdate" value="{{Customer[6]}}"
+                                                <label for="gender">Gender *</label>
+                                                <input type="text" id="gender" name="gender" value="{{Person[7]}}"
                                                     class="form-control form-control-md" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label >Salary *</label>
+                                                <input value="${{Person[14]}}.00"
+                                                    class="form-control form-control-md" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Experience *</label>
+                                                <input type="text" value="{{Person[15]}} Years"
+                                                    class="form-control form-control-md" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label >Speciality *</label>
+                                                <input type="text" value="{{Person[16]}}"
+                                                    class="form-control form-control-md" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label >Date of Joining *</label>
+                                                <input type="date" value="{{Person[17]}}"
+                                                    class="form-control form-control-md" readonly>
                                             </div>
                                         </div>
                                     </div>
@@ -542,14 +440,14 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="hno">House Number *</label>
-                                                <input type="number" id="hno" name="hno" value="{{Customer[8]}}"
+                                                <input type="number" id="hno" name="hno" value="{{Person[8]}}"
                                                     class="form-control form-control-md mb-0" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="street">Street *</label>
-                                                <input type="text" id="street" name="street" value="{{Customer[9]}}"
+                                                <input type="text" id="street" name="street" value="{{Person[9]}}"
                                                     class="form-control form-control-md-0" required>
                                             </div>
                                         </div>
@@ -558,14 +456,14 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="district">District *</label>
-                                                <input type="text" id="district" name="district" value="{{Customer[10]}}"
+                                                <input type="text" id="district" name="district" value="{{Person[10]}}"
                                                     class="form-control form-control-md mb-0" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="city">City *</label>
-                                                <input type="text" id="city" name="district" value="{{Customer[11]}}"
+                                                <input type="text" id="city" name="city" value="{{Person[11]}}"
                                                     class="form-control form-control-md mb-0" required>
                                             </div>
                                         </div>
@@ -574,14 +472,14 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="state">State *</label>
-                                                <input type="text" id="state" name="state" value="{{Customer[12]}}"
+                                                <input type="text" id="state" name="state" value="{{Person[12]}}"
                                                     class="form-control form-control-md mb-0" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="postcode">Postcode *</label>
-                                                <input type="number" id="postcode" name="pincode" value="{{Customer[13]}}"
+                                                <input type="number" id="postcode" name="pincode" value="{{Person[13]}}"
                                                     class="form-control form-control-md mb-0" required>
                                             </div>
                                         </div>
@@ -592,6 +490,74 @@
                                     <button type="submit" class="btn btn-dark btn-rounded btn-sm mb-4">Save Changes</button>
                                 </form>
                             </div>
+
+                            {% for order in Orders %}
+                                <div class="tab-pane" id="order-address{{order[5]}}">
+                                    <div class="icon-box icon-box-side icon-box-light">
+                                        <span class="icon-box-icon icon-map-marker">
+                                            <i class="w-icon-map-marker"></i>
+                                        </span>
+                                        <div class="icon-box-content">
+                                            <h4 class="icon-box-title mb-0 ls-normal">{{order[6]}} {{order[7]}} Address</h4>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane"></div>
+                                    <div class="row">
+                                        <div class="col-sm-6 mb-6">
+                                            <div class="ecommerce-address billing-address pr-lg-8">
+                                                <h4 class="title title-underline ls-25 font-weight-bold">Delivery Person ID:{{Person[0]}}</h4>
+                                                <address class="mb-4">
+                                                    <table class="address-table">
+                                                        <tbody>
+                                                             <tr>
+                                                                <th>Order ID:</th>
+                                                                <td>{{order[0]}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Name:</th>
+                                                                <td>{{order[6]}} {{order[7]}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Phone:</th>
+                                                                <td>{{order[8]}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Email:</th>
+                                                                <td>{{order[9]}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>House No:</th>
+                                                                <td>{{order[10]}}</td>
+                                                            <tr>
+                                                                <th>Street:</th>
+                                                                <td>{{order[11]}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>District:</th>
+                                                                <td>{{order[12]}}</td>
+                                                            <tr>
+                                                                <th>City:</th>
+                                                                <td>{{order[13]}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>State:</th>
+                                                                <td>{{order[14]}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Postcode:</th>
+                                                                <td>{{order[15]}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </address>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+
+
                         </div>
                     </div>
                 </div>
@@ -624,82 +590,6 @@
 
                     </div>
                 </div>
-                <div class="footer-middle">
-                    <div class="widget widget-category">
-                        <div class="category-box">
-                            <h6 class="category-name">Consumer Electric:</h6>
-                            <a href="/">TV Television</a>
-                            <a href="/">Air Condition</a>
-                            <a href="/">Refrigerator</a>
-                            <a href="/">Washing Machine</a>
-                            <a href="/">Audio Speaker</a>
-                            <a href="/">Security Camera</a>
-                            <a href="/">View All</a>
-                        </div>
-                        <div class="category-box">
-                            <h6 class="category-name">Clothing & Apparel:</h6>
-                            <a href="/">Men's T-shirt</a>
-                            <a href="/">Dresses</a>
-                            <a href="/">Men's Sneacker</a>
-                            <a href="/">Leather Backpack</a>
-                            <a href="/">Watches</a>
-                            <a href="/">Jeans</a>
-                            <a href="/">Sunglasses</a>
-                            <a href="/">Boots</a>
-                            <a href="/">Rayban</a>
-                            <a href="/">Acccessories</a>
-                        </div>
-                        <div class="category-box">
-                            <h6 class="category-name">Home, Garden & Kitchen:</h6>
-                            <a href="/">Sofa</a>
-                            <a href="/">Chair</a>
-                            <a href="/">Bed Room</a>
-                            <a href="/">Living Room</a>
-                            <a href="/">Cookware</a>
-                            <a href="/">Utensil</a>
-                            <a href="/">Blender</a>
-                            <a href="/">Garden Equipments</a>
-                            <a href="/">Decor</a>
-                            <a href="/">Library</a>
-                        </div>
-                        <div class="category-box">
-                            <h6 class="category-name">Health & Beauty:</h6>
-                            <a href="/">Skin Care</a>
-                            <a href="/">Body Shower</a>
-                            <a href="/">Makeup</a>
-                            <a href="/">Hair Care</a>
-                            <a href="/">Lipstick</a>
-                            <a href="/">Perfume</a>
-                            <a href="/">View all</a>
-                        </div>
-                        <div class="category-box">
-                            <h6 class="category-name">Jewelry & Watches:</h6>
-                            <a href="/">Necklace</a>
-                            <a href="/">Pendant</a>
-                            <a href="/">Diamond Ring</a>
-                            <a href="/">Silver Earing</a>
-                            <a href="/">Leather Watcher</a>
-                            <a href="/">Rolex</a>
-                            <a href="/">Gucci</a>
-                            <a href="/">Australian Opal</a>
-                            <a href="/">Ammolite</a>
-                            <a href="/">Sun Pyrite</a>
-                        </div>
-                        <div class="category-box">
-                            <h6 class="category-name">Computer & Technologies:</h6>
-                            <a href="/">Laptop</a>
-                            <a href="/">iMac</a>
-                            <a href="/">Smartphone</a>
-                            <a href="/">Tablet</a>
-                            <a href="/">Apple</a>
-                            <a href="/">Asus</a>
-                            <a href="/">Drone</a>
-                            <a href="/">Wireless Speaker</a>
-                            <a href="/">Game Controller</a>
-                            <a href="/">View all</a>
-                        </div>
-                    </div>
-                </div>
                 <div class="footer-bottom">
                     <div class="footer-left">
                         <p class="copyright">Copyright © 2021 JPAS Store. All Rights Reserved.</p>
@@ -714,7 +604,6 @@
         <!-- End of Footer -->
     </div>
     <!-- End of Page-wrapper-->
-
 
     <!-- Start of Scroll Top -->
     <a id="scroll-top" class="scroll-top" href="#top" title="Top" role="button"> <i class="w-icon-angle-up"></i> <svg
@@ -902,5 +791,5 @@
 </body>
 
 
-<!-- Mirrored from portotheme.com/html/wolmart/manager.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Apr 2022 07:14:34 GMT -->
+<!-- Mirrored from portotheme.com/html/wolmart/Person.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Apr 2022 07:14:34 GMT -->
 </html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from portotheme.com/html/wolmart/aorder.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Apr 2022 07:19:13 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <title>Wolmart eCommmerce Marketplace HTML Template</title>
+
+    <meta name="keywords" content="Marketplace ecommerce responsive HTML5 Template" />
+    <meta name="description" content="Wolmart is powerful marketplace &amp; ecommerce responsive Html5 Template.">
+    <meta name="author" content="D-THEMES">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/icons/favicon.png">
+
+    <!-- WebFont.js -->
+    <script>
+        WebFontConfig = {
+            google: { families: ['Poppins:400,500,600,700'] }
+        };
+        ( function ( d ) {
+            var wf = d.createElement( 'script' ), s = d.scripts[0];
+            wf.src = 'assets/js/webfont.js';
+            wf.async = true;
+            s.parentNode.insertBefore( wf, s );
+        } )( document );
+    </script>
+
+    <link rel="preload" href="assets/vendor/fontawesome-free/webfonts/fa-regular-400.woff2" as="font" type="font/woff2"
+        crossorigin="anonymous">
+    <link rel="preload" href="assets/vendor/fontawesome-free/webfonts/fa-solid-900.woff2" as="font" type="font/woff2"
+        crossorigin="anonymous">
+    <link rel="preload" href="assets/vendor/fontawesome-free/webfonts/fa-brands-400.woff2" as="font" type="font/woff2"
+            crossorigin="anonymous">
+    <link rel="preload" href="assets/fonts/wolmart87d5.woff?png09e" as="font" type="font/woff" crossorigin="anonymous">
+
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/vendor/fontawesome-free/css/all.min.css">
+
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/vendor/magnific-popup/magnific-popup.min.css">
+
+    <!-- Default CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.min.css">
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <h1 class="d-none">Wolmart - Responsive Marketplace HTML Template</h1>
+        <!-- Start of Header -->
+        <header class="header header-border">
+            <div class="header-top">
+                <div class="container">
+                    <div class="header-left">
+                        <p class="welcome-msg">Welcome to JPAS Store!</p>
+                    </div>
+
+                    <div class="header-right">
+                        <span class="divider d-lg-show"></span>
+                        <a href="/auth/faq" class="d-lg-show">FAQ</a>
+                        <a href="/auth/about" class="d-lg-show">About Us</a>
+                        <a href="/auth/contact" class="d-lg-show">Contact Us</a>
+                        <span class="divider d-lg-show"></span>
+                        <a href="/store/account" class="d-lg-show">My Account</a>
+                        <a href="/auth/logout" class="d-lg-show sign-out"><i
+                                class="w-icon-account"></i>Sign Out</a>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Header Top -->
+
+            <div class="header-middle">
+                <div class="container">
+                    <div class="header-left mr-md-4">
+                        <a href="#" class="mobile-menu-toggle  w-icon-hamburger" aria-label="menu-toggle">
+                        </a>
+                        <a href="/" class="logo ml-lg-0">
+                            <img src="assets/images/logo.png" alt="logo" width="144" height="45" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Header Middle -->
+        </header>
+        <!-- End of Header -->
+
+
+        <!-- Start of Main -->
+        <main class="main order">
+
+            <nav class="breadcrumb-nav">
+                <div class="container">
+                    <ul class="breadcrumb">
+                        <li><a href="/adAuth">Manager Home</a></li>
+                        <li>Invoices</li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Start of PageContent -->
+            <div class="page-content mb-10 pb-2">
+                <div class="container">
+                    {% for invoice in Invoices %}
+                    <ul class="order-view list-style-none">
+                        <li>
+                            <label>Invoice ID</label>
+                            <strong>{{invoice[0]}}</strong>
+                        </li>
+                        <li>
+                            <label>Inventory ID</label>
+                            <strong>{{invoice[1]}}</strong>
+                        </li>
+                        <li>
+                            <label>Vendor ID</label>
+                            <strong>{{Vendor[0]}}</strong>
+                        </li>
+                        <li>
+                            <label>Status</label>
+                            <strong>
+                                {% if invoice[2] == 1 %}
+                                    Delivered
+                                {% else %}
+                                    On Hold
+                                {% endif %}
+                            </strong>
+                        </li>
+                        <li>
+                            <label>
+                                <i class="fas fa-calendar-alt"></i>
+                                {% if invoice[2] == 1 %}
+                                    Delivered on
+                                {% else %}
+                                    Order date
+                                {% endif %}
+                            </label>
+                            <strong>
+                                {% if invoice[2] == 1 %}
+                                    {{invoice[4]}}
+                                {% else %}
+                                    {{invoice[3]}}
+                                {% endif %}
+                            </strong>
+                        </li>
+                    </ul>
+                    <!-- End of Order View -->
+
+                    <div class="order-details-wrapper mb-5">
+                        <h4 class="title text-uppercase ls-25 mb-5">Order Details</h4>
+                        <table class="order-table">
+                            <thead>
+                                <tr>
+                                    <th class="text-dark">Products</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for batch in Batch %}
+                            {%if batch[4] == invoice[0] %}
+                                <tr>
+                                    <td>
+                                        <a href="#">{{batch[0]}}</a><br>
+                                        {{batch[1]}}
+                                    </td>
+                                    <td>
+                                        <strong>{{batch[2]}}</strong><br>
+                                        Quantity : x{{batch[3]}}
+                                    </td>
+                                </tr>
+                            {% endif %}
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- End of Order Details -->
+                    {% endfor %}
+
+
+                    <div id="account-addresses">
+                        <div class="row">
+                            <div class="col-sm-6 mb-8">
+                                <div class="ecommerce-address billing-address">
+                                    <h4 class="title title-underline ls-25 font-weight-bold">Billing Address</h4>
+                                    <address class="mb-4">
+                                        <table class="address-table">
+                                            <tbody>
+                                                <tr>
+                                                    <th>Inventory ID:</th>
+                                                    <td>{{Inventory[0]}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>House No:</th>
+                                                    <td>{{Inventory[1]}}</td>
+                                                <tr>
+                                                    <th>Street:</th>
+                                                    <td>{{Inventory[2]}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>District:</th>
+                                                    <td>{{Inventory[3]}}</td>
+                                                <tr>
+                                                    <th>City:</th>
+                                                    <td>{{Inventory[4]}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>State:</th>
+                                                    <td>{{Inventory[5]}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Postcode:</th>
+                                                    <td>{{Inventory[6]}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </address>
+                                    <p>admin@jpas.in</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mb-8">
+                                <div class="ecommerce-address shipping-address">
+                                    <h4 class="title title-underline ls-25 font-weight-bold">Vendor Address</h4>
+                                    <address class="mb-4">
+                                        <table class="address-table">
+                                            <tbody>
+                                                <tr>
+                                                    <th>Vendor ID:</th>
+                                                    <td>{{Vendor[0]}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Name:</th>
+                                                    <td>{{Vendor[1]}} {{Vendor[2]}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Phone:</th>
+                                                    <td>{{Vendor[4]}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Email:</th>
+                                                    <td>{{Vendor[3]}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Gender:</th>
+                                                    <td>{{Vendor[5]}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>House No:</th>
+                                                    <td>{{Vendor[6]}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Street:</th>
+                                                    <td>{{Vendor[7]}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>District:</th>
+                                                    <td>{{Vendor[8]}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>City:</th>
+                                                    <td>{{Vendor[9]}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>State:</th>
+                                                    <td>{{Vendor[10]}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Postcode:</th>
+                                                    <td>{{Vendor[11]}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </address>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End of Account Address -->
+
+                    <a href="/adAuth" class="btn btn-dark btn-rounded btn-icon-left btn-back mt-6"><i class="w-icon-long-arrow-left"></i>Back To Dashboard</a>
+                </div>
+            </div>
+            <!-- End of PageContent -->
+        </main>
+        <!-- End of Main -->
+
+        <!-- Start of Footer -->
+        <footer class="footer appear-animate" data-animation-options="{
+            'name': 'fadeIn'
+        }">
+            <div class="footer-newsletter bg-primary pt-6 pb-6">
+                <div class="container">
+                    <div class="row justify-content-center align-items-center">
+                    </div>
+                </div>
+            </div>
+            <div class="container">`
+                <div class="footer-top">
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="widget widget-about">
+                                <a href="/" class="logo-footer">
+                                    <img src="assets/images/logo_footer.png" alt="logo-footer" width="144"
+                                        height="45" />
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <div class="footer-left">
+                        <p class="copyright">Copyright © 2021 JPAS Store. All Rights Reserved.</p>
+                    </div>
+                    <div class="footer-right">
+                        <span class="payment-label mr-lg-8">We're using safe payment for</span>
+                        <p class="copyright">UPI and COD.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+    </div>
+    <!-- End of Page Wrapper -->
+    
+    <!-- Start of Scroll Top -->
+    <a id="scroll-top" class="scroll-top" href="#top" title="Top" role="button"> <i class="w-icon-angle-up"></i> <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 70"> <circle id="progress-indicator" fill="transparent" stroke="#000000" stroke-miterlimit="10" cx="35" cy="35" r="34" style="stroke-dasharray: 16.4198, 400;"></circle> </svg> </a>
+    <!-- End of Scroll Top -->
+
+
+    <!-- Plugin JS File -->
+    <script src="assets/vendor/jquery/jquery.min.js"></script>
+    <script src="assets/vendor/sticky/sticky.js"></script>
+    <script src="assets/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="assets/js/main.min.js"></script>
+</body>
+
+
+<!-- Mirrored from portotheme.com/html/wolmart/aorder.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 14 Apr 2022 07:19:14 GMT -->
+</html>
