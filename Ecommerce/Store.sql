@@ -549,7 +549,7 @@ INSERT INTO Customer(uid, fname, lname, phone, email, gender, dob, hno, street, 
     (50,'Lori','Ayers','355-113-8729','rodriguezstephanie@yahoo.com','Male','1997-11-06',972,' 9729, Box 5662APO AA 91827 ','Tirap','Bhopal','Orissa',183282);
 
 
-create table oyee(
+create table Employee(
 eid int primary key AUTO_INCREMENT,
 fname varchar(20)not null,
 lname varchar(20) default "-",
