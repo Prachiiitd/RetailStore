@@ -5,7 +5,7 @@ use store;
 
 
 create table Category(
-catid int primary key, check(catid >= 0),
+catid int primary key AUTO_INCREMENT,
 catname varchar(20) not null,
 noofworkers int not null, check(noofworkers >= 0)
 );
@@ -16,7 +16,7 @@ Insert into Category values
 (3,'EAppliances',10);
 
 create table Products(
-	pdid int primary key, check(pdid >= 0),
+	pdid int primary key AUTO_INCREMENT,
 	catid int,
     name varchar(100) not null,
     brand varchar(50) not null,
@@ -166,13 +166,13 @@ insert into Clothes values
 
 
 create table Vendor(
-venid int primary key, check(venid >= 0),
+venid int primary key AUTO_INCREMENT,
 fname varchar(20) not null,
 lname varchar(20) default "-",
 email varchar(50) not null, check(email like '%_@___%.___%'),
 phone char(12) not null,
 gender varchar(9) not null, check(gender in ('Male', 'Female', 'others')),
-hno int default -1, check(venid >= -1),
+hno int default -1, check(hno >= -1),
 street varchar(150) not null,
 district varchar(50) not null,
 city varchar(20) not null,
@@ -204,7 +204,7 @@ INSERT INTO Vendor VALUES
  
  
 create table Inventory(
-invenid int primary key, check(invenid >= 0),
+invenid int primary key AUTO_INCREMENT,
 hno int not null, check(hno >= 0),
 street varchar(255) not null,
 district varchar(20) not null,
@@ -306,7 +306,7 @@ insert into Distributes values
 (5,16);
 
 create table Invoice(
-	invid int primary key, check(invid >= 0),
+	invid int primary key AUTO_INCREMENT,
     invenid int,
     statusof boolean not null,
     receivedDate date not null,
@@ -345,7 +345,7 @@ insert into Invoice values
 
 
 create table Batch(
-	bid int primary key, check(bid >= 0),
+	bid int primary key AUTO_INCREMENT,
     pdid int,
     invid int,
     quantity int default 0, check(quantity >= 0),
@@ -446,7 +446,7 @@ insert into Morders values
 
 
 create table Manager(
-meid int primary key, check(meid >= 0),
+meid int primary key AUTO_INCREMENT,
 invenid int,
 fname varchar(20)not null, 
 lname varchar(20) default "-",
@@ -480,7 +480,7 @@ INSERT INTO Manager(meid, invenid, fname, lname, phone, email, dob, gender, hno,
 
 
 create table Customer(
-uid int primary key, check(uid >= 0),
+uid int primary key AUTO_INCREMENT,
 fname varchar(20)not null,
 lname varchar(20) default "-",
 phone char(12) not null,
@@ -549,8 +549,8 @@ INSERT INTO Customer(uid, fname, lname, phone, email, gender, dob, hno, street, 
     (50,'Lori','Ayers','355-113-8729','rodriguezstephanie@yahoo.com','Male','1997-11-06',972,' 9729, Box 5662APO AA 91827 ','Tirap','Bhopal','Orissa',183282);
 
 
-create table Employee(
-eid int primary key, check(eid >= 0),
+create table oyee(
+eid int primary key AUTO_INCREMENT,
 fname varchar(20)not null,
 lname varchar(20) default "-",
 phone char(12) not null,
@@ -1200,7 +1200,7 @@ where uid in ( select uid from Corders
 select * from Employee
 where eid in( select deid from DeliveryPerson , Corders 
 				where DeliveryPerson.cordid = Corders.cordid and
-                dateoforderplaced = '2021-07-01'
+                dateoforderplaced = '2021-07-F01'
                 );
                 
 
