@@ -258,7 +258,7 @@ def placeOrder():
 
         _pending = "SELECT * FROM Cart WHERE ordid = '{}'".format(loginid)
         placed = execute(_pending)
-        print(placed)
+
         for item in placed:
             _update = "INSERT INTO Cart (ordid, pdid, quantity, subtotal, attr, placed)" \
                       "VALUES ('{}', '{}', '{}', '{}', '{}', '{}')".format(ordid, item[1], item[2], item[3], item[4], 1)

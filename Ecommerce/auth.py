@@ -43,9 +43,6 @@ def login():
         res = execute(query)
         cust = [loginid, 'customer']
 
-        # print(loginid, 'customer', password)
-        # print(res)
-
         if res == -1 or len(res) == 0:
             flash("Invalid credentials")
             return redirect('/auth')

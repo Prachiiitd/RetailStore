@@ -464,7 +464,6 @@ pincode int not null, check(pincode between 000000 and 999999),
 salary int default 10000, check(salary >= 8000),
 experience int not null, check(experience >= 0),
 doj date not null, check(year(doj) > year(dob)),
-
 foreign key(invenid) references Inventory(invenid)
     on update cascade
 );
