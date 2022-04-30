@@ -368,6 +368,17 @@ set Eappliances.quantity=10+Eappliances.quantity,
 InInventory.quantity=InInventory.quantity-10
 where Eappliances.quantity<5 and Eappliances.pdid=new.pdid and InInventory.pdid=new.pdid;
 
+DELIMITER $$
+CREATE TRIGGER InInventorypr
+BEFORE Update
+ON InInventory
+FOR EACH ROW
+BEGIN
+  if (NEW.quantity < 10) THEN
+	 set NEW.quantity = NEW.quantity + 15;
+  END IF;
+END$$
+
 
 --views
 --Manager
@@ -420,7 +431,7 @@ create view Shippings as
 SELECT D.cordid, C.dateoforderplaced, C.dateoforderdelivery, C.orderstatus, C.totalCost, U.uid,
 U.fname, U.lname, U.phone, U.email, U.hno, U.street, U.district, U.city, U.state, U.pincode, D.deid
 FROM DeliveryPerson D JOIN Corders C JOIN Customer U ON D.cordid = C.cordid AND C.uid = U.uid
-ORDER BY C.orderstatus='0';
+ORDER BY C.orderstatus=0;
 
 
 --Worker
@@ -459,6 +470,12 @@ Products.name, Products.sellingPrice, Cart.ordid
 FROM Cart JOIN Products ON Cart.pdid = Products.pdid
 WHERE Cart.placed = 1;
 
+create view DeliveryPersonView as
+select DIStINCT eid
+FROM Supervision
+WHERE eid NOT IN (SELECT DISTINCT cheid FROM CatHead);
+
+
 
 create view OrderView as
 SELECT Cart.quantity, Cart.subtotal, Products.name,
@@ -475,198 +492,207 @@ CREATE USER 'Worker'@'localhost' IDENTIFIED BY 'Root#1234';
 
 --Inventory
 GRANT SELECT
-ON store.Inventory TO 'Manager'@'localhost';
+ON Store.Inventory TO 'Manager'@'localhost';
 
 --Inventory
 GRANT ALL PRIVILEGES
-ON store.InInventory TO 'Manager'@'localhost';
+ON Store.InInventory TO 'Manager'@'localhost';
 
 --Products
 GRANT UPDATE, SELECT
-ON store.Products TO 'Worker'@'localhost';
+ON Store.Products TO 'Worker'@'localhost';
 
 GRANT ALL
-ON store.Products TO 'CatHead'@'localhost';
+ON Store.Products TO 'CatHead'@'localhost';
 
 GRANT SELECT
-ON store.Products TO 'Customer'@'localhost';
+ON Store.Products TO 'Customer'@'localhost';
 
 --Clothes
 GRANT ALL
-ON store.Clothes TO 'CatHead'@'localhost';
+ON Store.Clothes TO 'CatHead'@'localhost';
 
 GRANT SELECT
-ON store.Clothes TO 'Customer'@'localhost';
+ON Store.Clothes TO 'Customer'@'localhost';
 
 --Footwear
 GRANT ALL
-ON store.Footwears TO 'CatHead'@'localhost';
+ON Store.Footwears TO 'CatHead'@'localhost';
 
 GRANT SELECT
-ON store.Footwears TO 'Customer'@'localhost';
+ON Store.Footwears TO 'Customer'@'localhost';
 
 --Eappliances
 GRANT ALL
-ON store.Eappliances TO 'CatHead'@'localhost';
+ON Store.Eappliances TO 'CatHead'@'localhost';
 
 GRANT SELECT
-ON store.Eappliances TO 'Customer'@'localhost';
+ON Store.Eappliances TO 'Customer'@'localhost';
 
 
 --Customer
 GRANT SELECT, UPDATE
-ON store.Customer TO 'Customer'@'localhost';
+ON Store.Customer TO 'Customer'@'localhost';
 
 --Manager
 GRANT SELECT, UPDATE
-ON store.Manager TO 'Manager'@'localhost';
+ON Store.Manager TO 'Manager'@'localhost';
 
 --Emploeee
 GRANT ALL
-ON store.Employee TO 'Manager'@'localhost';
+ON Store.Employee TO 'Manager'@'localhost';
 
 GRANT ALL
-ON store.Employee TO 'CatHead'@'localhost';
+ON Store.Employee TO 'CatHead'@'localhost';
 
 GRANT SELECT, UPDATE
-ON store.Employee TO 'DeliveryPerson'@'localhost';
+ON Store.Employee TO 'DeliveryPerson'@'localhost';
 
 GRANT SELECT, UPDATE
-ON store.Employee TO 'Worker'@'localhost';
+ON Store.Employee TO 'Worker'@'localhost';
 
 --DeliveryPerson
 GRANT SELECT
-ON store.DeliveryPerson TO 'DeliveryPerson'@'localhost';
+ON Store.DeliveryPerson TO 'DeliveryPerson'@'localhost';
+
+GRANT SELECT, INSERT
+ON Store.DeliveryPerson TO 'Customer'@'localhost';
 
 --Worker
 GRANT SELECT, INSERT, DELETE
-ON store.Worker TO 'CatHead'@'localhost';
+ON Store.Worker TO 'CatHead'@'localhost';
 
 --Corders
 GRANT SELECT, UPDATE
-ON store.Corders TO 'DeliveryPerson'@'localhost';
+ON Store.Corders TO 'DeliveryPerson'@'localhost';
 
 GRANT SELECT, INSERT
-ON store.Corders TO 'Customer'@'localhost';
+ON Store.Corders TO 'Customer'@'localhost';
 
 
 --Morders
 GRANT SELECT, INSERT
-ON store.Morders TO 'Manager'@'localhost';
+ON Store.Morders TO 'Manager'@'localhost';
 
 --Vendor
 GRANT SELECT
-ON store.Vendor TO 'Manager'@'localhost';
+ON Store.Vendor TO 'Manager'@'localhost';
 
 --Transactions
 GRANT SELECT, INSERT, DELETE
-ON store.Transactions TO 'Customer'@'localhost';
+ON Store.Transactions TO 'Customer'@'localhost';
 
 --Cart
 GRANT ALL
-ON store.Cart TO 'Customer'@'localhost';
+ON Store.Cart TO 'Customer'@'localhost';
 
 --Views
 GRANT SELECT, INSERT
-ON store.Views TO 'Customer'@'localhost';
+ON Store.Views TO 'Customer'@'localhost';
 
 --Distributes
 GRANT SELECT, INSERT
-ON store.Distributes TO 'Manager'@'localhost';
+ON Store.Distributes TO 'Manager'@'localhost';
 
 --Batch
 GRANT SELECT, INSERT
-ON store.Batch TO 'Manager'@'localhost';
+ON Store.Batch TO 'Manager'@'localhost';
 
 --Invoice
 GRANT SELECT, INSERT
-ON store.Invoice TO 'Manager'@'localhost';
+ON Store.Invoice TO 'Manager'@'localhost';
 
 --login
 GRANT SELECT
-ON store.login TO 'Customer'@'localhost', 'Manager'@'localhost', 'DeliveryPerson'@'localhost', 'Worker'@'localhost', 'CatHead'@'localhost';
+ON Store.login TO 'Customer'@'localhost', 'Manager'@'localhost', 'DeliveryPerson'@'localhost', 'Worker'@'localhost', 'CatHead'@'localhost';
 
 --Supervisor
 GRANT SELECT, INSERT
-ON store.Supervisor TO 'CatHead'@'localhost';
+ON Store.Supervisor TO 'CatHead'@'localhost';
 
 --Supervision
 GRANT SELECT, INSERT
-ON store.Supervision TO 'Manager'@'localhost';
+ON Store.Supervision TO 'Manager'@'localhost';
 
 
 --CatHead
 GRANT SELECT, INSERT, DELETE
-ON store.CatHead TO 'Manager'@'localhost';
+ON Store.CatHead TO 'Manager'@'localhost';
 
 GRANT SELECT
-ON store.CatHead TO 'CatHead'@'localhost';
+ON Store.CatHead TO 'CatHead'@'localhost';
 
 --Category
 GRANT SELECT
-ON store.Category TO 'CatHead'@'localhost', 'Worker'@'localhost', 'Customer'@'localhost';
+ON Store.Category TO 'CatHead'@'localhost', 'Worker'@'localhost', 'Customer'@'localhost';
 
 -- GRANTS ON VIEWS
 --BatchView
 GRANT SELECT
-ON store.BatchView TO 'Manager'@'localhost';
+ON Store.BatchView TO 'Manager'@'localhost';
 
 --CartView
 GRANT SELECT
-ON store.CartView TO 'Customer'@'localhost';
+ON Store.CartView TO 'Customer'@'localhost';
 
 --EmployeeUnderCat
 GRANT SELECT
-ON store.EmployeeUnderCat TO 'CatHead'@'localhost';
+ON Store.EmployeeUnderCat TO 'CatHead'@'localhost';
 
 --InCartView
 GRANT SELECT
-ON store.InCartView TO 'Customer'@'localhost';
+ON Store.InCartView TO 'Customer'@'localhost';
 
 --InInventoryViewCat
 GRANT SELECT
-ON store.InInventoryViewCat TO 'CatHead'@'localhost';
+ON Store.InInventoryViewCat TO 'CatHead'@'localhost';
 
 --InInventoryViewMan
 GRANT SELECT
-ON store.InInventoryViewMan TO 'Manager'@'localhost';
+ON Store.InInventoryViewMan TO 'Manager'@'localhost';
 
 --InInventoryViewWork
 GRANT SELECT
-ON store.InInventoryViewWork TO 'Worker'@'localhost';
+ON Store.InInventoryViewWork TO 'Worker'@'localhost';
 
 --InventoryViewCat
 GRANT SELECT
-ON store.InventoryViewCat TO 'CatHead'@'localhost';
+ON Store.InventoryViewCat TO 'CatHead'@'localhost';
 
 --InventoryViewWork
 GRANT SELECT
-ON store.InventoryViewWork TO 'Worker'@'localhost';
+ON Store.InventoryViewWork TO 'Worker'@'localhost';
 
 --InvoiceUnderMan
 GRANT SELECT
-ON store.InvoiceUnderMan TO 'Manager'@'localhost';
+ON Store.InvoiceUnderMan TO 'Manager'@'localhost';
 
 --OrderView
 GRANT SELECT
-ON store.OrderView TO 'Customer'@'localhost';
+ON Store.OrderView TO 'Customer'@'localhost';
 
 --ProductsUnderCat
 GRANT SELECT
-ON store.ProductsUnderCat TO 'CatHead'@'localhost';
+ON Store.ProductsUnderCat TO 'CatHead'@'localhost';
 
 --ProductsUnderWork
 GRANT SELECT
-ON store.ProductsUnderWork TO 'Worker'@'localhost';
+ON Store.ProductsUnderWork TO 'Worker'@'localhost';
 
 --Shippings
 GRANT SELECT
-ON store.Shippings TO 'DeliveryPerson'@'localhost';
+ON Store.Shippings TO 'DeliveryPerson'@'localhost';
 
 --VendorViewMan
 GRANT SELECT
-ON store.VendorViewMan TO 'Manager'@'localhost';
+ON Store.VendorViewMan TO 'Manager'@'localhost';
+
+--DeliveryPersonView
+GRANT SELECT
+ON Store.DeliveryPersonView TO 'Customer'@'localhost';
 ------------------------------------------------------
 
 
 
+
+--Data filling

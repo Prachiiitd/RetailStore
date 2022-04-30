@@ -195,6 +195,20 @@
             </nav>
             <!-- End of Breadcrumb Area -->
 
+            {% with messages = get_flashed_messages() %}
+                 {% if messages %}
+                       {% for message in messages %}
+                            <div class="alert alert-dark alert-bg alert-block alert-inline show-code-action">
+
+                                {{message}}
+                                <button class="btn btn-link btn-close" aria-label="button">
+                                    <i class="close-icon"></i>
+                                </button>
+                            </div>
+                       {% endfor %}
+                {% endif %}
+            {% endwith %}
+
             <!-- Start of Page Content -->
             <div class="page-content mb-10">
                 <div class="shop-default-banner shop-boxed-banner banner d-flex align-items-center mb-6"
@@ -268,8 +282,8 @@
                                             </div>
                                             <div class="product-pa-wrapper">
                                                 <div class="product-price">
-                                                    <ins class="new-price">${{product[6]}}.00</ins><del
-                                                        class="old-price">${{product[7]}}.00</del>
+                                                    <ins class="new-price">${{product[7]}}.00</ins><del
+                                                        class="old-price">${{product[6]}}.00</del>
                                                 </div>
                                             </div>
                                         </div>

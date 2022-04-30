@@ -6,9 +6,9 @@ deliveryPerson = Blueprint('deliveryPerson', __name__, url_prefix='/deliveryPers
 
 db = sql.connect(
     host="localhost",
-    user="root",
+    user="DeliveryPerson",
     passwd="Root#1234",
-    database="store"
+    database="Store"
 )
 
 
@@ -91,7 +91,7 @@ def changeStatus():
             return redirect('/adAuth/logout')
         else:
             cordid = request.form['cordid']
-            query = "UPDATE Corders SET orderstatus = 'true' WHERE cordid = {}".format(cordid)
+            query = "UPDATE Corders SET orderstatus = true WHERE cordid = {}".format(cordid)
             res = execute(query)
             if res == -1:
                 flash('Could not update the status')

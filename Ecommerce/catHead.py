@@ -7,9 +7,9 @@ catHead = Blueprint('catHead', __name__, url_prefix='/catHead', template_folder=
 
 db = sql.connect(
     host="localhost",
-    user="root",
+    user="CatHead",
     passwd="Root#1234",
-    database="store"
+    database="Store"
 )
 
 

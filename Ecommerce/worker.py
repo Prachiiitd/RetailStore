@@ -6,9 +6,9 @@ worker = Blueprint('worker', __name__, url_prefix='/worker', template_folder='te
 
 db = sql.connect(
     host="localhost",
-    user="root",
+    user="Worker",
     passwd="Root#1234",
-    database="store"
+    database="Store"
 )
 
 

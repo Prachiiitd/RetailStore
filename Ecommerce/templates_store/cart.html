@@ -189,6 +189,20 @@
             </nav>
             <!-- End of Breadcrumb -->
 
+            {% with messages = get_flashed_messages() %}
+                 {% if messages %}
+                       {% for message in messages %}
+                            <div class="alert alert-dark alert-bg alert-block alert-inline show-code-action">
+
+                                {{message}}
+                                <button class="btn btn-link btn-close" aria-label="button">
+                                    <i class="close-icon"></i>
+                                </button>
+                            </div>
+                       {% endfor %}
+                {% endif %}
+            {% endwith %}
+
             <!-- Start of PageContent -->
             <div class="page-content">
                 <div class="container">

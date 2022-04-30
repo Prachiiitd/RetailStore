@@ -7,9 +7,9 @@ store = Blueprint('store', __name__, url_prefix='/store', template_folder='templ
 
 db = sql.connect(
     host="localhost",
-    user="root",
+    user="Customer",
     passwd="Root#1234",
-    database="store"
+    database="Store"
 )
 
 
@@ -176,7 +176,7 @@ def eappliances():
         loginid, usertype = session['user']
         cart, cart_total = fetchCart(loginid)
 
-        _eappliances = "SELECT * FROM Pr    oducts WHERE catid = 3"
+        _eappliances = "SELECT * FROM Products WHERE catid = 3"
         eappliances = execute(_eappliances)
 
         _view = "INSERT INTO Views(uid, catid) VALUES('{}', 3)".format(loginid)

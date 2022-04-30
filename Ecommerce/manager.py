@@ -7,9 +7,9 @@ manager = Blueprint('manager', __name__, url_prefix='/manager',
 
 db = sql.connect(
     host="localhost",
-    user="root",
+    user="Manager",
     passwd="Root#1234",
-    database="store"
+    database="Store"
 )
 
 

@@ -8,7 +8,7 @@ db = sql.connect(
     host="localhost",
     user="root",
     passwd="Root#1234",
-    database="store"
+    database="Store"
 )
 
 

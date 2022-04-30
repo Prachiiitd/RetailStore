@@ -9,9 +9,9 @@ user = Blueprint('user', __name__, url_prefix='/user', template_folder='template
 
 db = sql.connect(
     host="localhost",
-    user="root",
+    user="Customer",
     passwd="Root#1234",
-    database="store"
+    database="Store"
 )
 
 
@@ -262,6 +262,13 @@ def placeOrder():
         _transactinn = "INSERT INTO Transactions (cordid, ofStatus, paymentmethod)" \
                        " VALUES ('{}', '{}', '{}')".format(ordid, 1, paymentmethod)
         execute(_transactinn)
+
+        _allot = """INSERT INTO DeliveryPerson (cordid, deid) VALUES
+                    ((select max(cordid) from Corders),
+                    (SELECT eid FROM DeliveryPersonView 
+                    ORDER BY RAND()
+                    LIMIT 1))"""
+        execute(_allot)
 
         print(res, ordid, placed)
         if res == -1 or placed == -1:
