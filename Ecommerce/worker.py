@@ -38,24 +38,13 @@ def index():
                        WHERE eid = {}""".format(loginid)
             worker = execute(_worker)
 
-            _inventory = """SELECT DISTINCT * FROM Inventory JOIN Manager JOIN Supervision JOIN Employee JOIN Supervisor JOIN 
-            CatHead ON Employee.eid = Supervisor.supervisee_eid AND Supervisor.superviser_eid = CatHead.cheid AND 
-            CatHead.cheid = Supervision.eid AND Supervision.meid = Manager.meid AND Inventory.invenid = Manager.invenid 
-            WHERE Employee.eid = {}""".format(loginid)
+            _inventory = """SELECT * FROM InventoryViewWork WHERE eid = {}""".format(loginid)
             inventory = execute(_inventory)
 
-            _ininventory = """SELECT DISTINCT InInventory.pdid, Products.name, Products.brand, InInventory.quantity 
-                        FROM Products JOIN InInventory JOIN Inventory JOIN Manager JOIN Supervision JOIN Employee JOIN 
-                        CatHead JOIN Supervisor ON InInventory.pdid = Products.pdid AND Inventory.invenid = InInventory.invenid AND 
-                        Manager.invenid = Inventory.invenid AND Manager.meid = Supervision.meid AND 
-                        Supervision.eid = CatHead.cheid AND CatHead.cheid = Supervisor.superviser_eid AND 
-                        Supervisor.supervisee_eid = Employee.eid AND Products.catid = CatHead.catid
-                        WHERE Employee.eid = {}""".format(loginid)
+            _ininventory = """SELECT DISTINCT * FROM InInventoryViewWork WHERE eid = {}""".format(loginid)
             ininventory = execute(_ininventory)
 
-            _products = """SELECT DISTINCT * FROM Products JOIN CatHead JOIN Supervisor JOIN Employee ON 
-            Products.catid = CatHead.catid AND CatHead.cheid = Supervisor.superviser_eid AND 
-            Supervisor.supervisee_eid = Employee.eid AND Employee.eid = {}""".format(loginid)
+            _products = """SELECT DISTINCT * FROM ProductsUnderWork WHERE   eid = {}""".format(loginid)
             products = execute(_products)
 
             return render_template('worker.html', InInventory=ininventory,
@@ -118,5 +107,3 @@ def updatePrice():
             return redirect(request.referrer)
     else:
         return redirect('/adAuth')
-
-

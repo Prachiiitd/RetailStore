@@ -237,7 +237,7 @@ insert into InInventory values
 (1,1, 43),
 (1,2, 50),
 (1,3, 45),
-(1,4, 12),
+(1,4, 50),
 (1,5, 45),
 (2,6, 54),
 (2,7, 100),
@@ -248,22 +248,22 @@ insert into InInventory values
 (3,12,34),
 (3,13,12),
 (3,14,80),
-(3,15,1),
+(3,15,71),
 (4,16,55),
 (4,17,43),
 (4,18,90),
-(4,19,12),
+(4,19,52),
 (4,20,33),
 (5,21,10),
-(5,22,6),
+(5,22,68),
 (5,23,65),
-(5,24, 43),
+(5,24,43),
 (5,25,100),
 (1,26,43),
-(2,27,1),
+(2,27,81),
 (3,28,54),
-(4,29, 32),
-(5,30,12);
+(4,29,32),
+(5,30,72);
 
 
 
@@ -848,7 +848,7 @@ on update cascade
 );
 
 insert into Corders values
-(1, 1, '1000-01-01', '1000-01-01', false, 0),
+(1, 1, '1000-01-01', '1000-                                                                                                                                                 -01', false, 0),
 (2, 2, '1000-01-01', '1000-01-01', false, 0),
 (3, 3, '1000-01-01', '1000-01-01', false, 0),
 (4, 4, '1000-01-01', '1000-01-01', false, 0),
@@ -1197,9 +1197,364 @@ set new.discount=new.costPrice*0.1,
 new.sellingPrice=new.costPrice-new.discount;
 
 
+--When the order is inserted in the cart
+create trigger jbcartmeadd1
+after insert on Cart
+for each row
+update Eappliances
+set quantity=quantity-new.quantity
+where Eappliances.pdid=new.pdid;
 
 
--- Ques-1: 
+create trigger jbcartmeadd2
+after insert on Cart
+for each row
+update Footwears
+set quantity=quantity-new.quantity
+where Footwears.pdid=new.pdid;
+
+
+create trigger jbcartmeadd3
+after insert on Cart
+for each row
+update Clothes
+set Clothes.quantity=Clothes.quantity-new.quantity
+where Clothes.pdid=new.pdid;
+
+--
+create trigger onIninventory1
+after insert on Cart
+for each row
+update Footwears,InInventory
+set Footwears.quantity=10+Footwears.quantity,
+InInventory.quantity=InInventory.quantity-10
+where Footwears.quantity<5 and Footwears.pdid=new.pdid and InInventory.pdid=new.pdid;
+
+
+create trigger onIninventory2
+after insert on Cart
+for each row
+update Clothes,InInventory
+set Clothes.quantity=10+Clothes.quantity,
+InInventory.quantity=InInventory.quantity-10
+where Clothes.quantity<5 and Clothes.pdid=new.pdid and InInventory.pdid=new.pdid;
+
+
+create trigger onIninventory3
+after insert on Cart
+for each row
+update Eappliances,InInventory
+set Eappliances.quantity=10+Eappliances.quantity,
+InInventory.quantity=InInventory.quantity-10
+where Eappliances.quantity<5 and Eappliances.pdid=new.pdid and InInventory.pdid=new.pdid;
+
+
+--views
+--Manager
+create view InInventoryViewMan as
+SELECT InInventory.pdid, Products.name, Products.brand, InInventory.quantity, InInventory.invenid
+FROM InInventory JOIN Products ON InInventory.pdid = Products.pdid;
+
+create view VendorViewMan as
+SELECT Vendor.venid, Vendor.fname, Vendor.lname, Vendor.email, Vendor.phone,
+Vendor.gender, Vendor.hno, Vendor.street, Vendor.district, Vendor.city,
+Vendor.state, Vendor.pincode, Distributes.invenid FROM Vendor JOIN Distributes
+ON Vendor.venid = Distributes.venid;
+
+create view InvoiceUnderMan as
+SELECT Invoice.invid, Invoice.invenid, Invoice.statusof, Invoice.receivedDate,
+Invoice.fulfilledDate, Morders.venid FROM Invoice JOIN Morders
+ON Invoice.invid = Morders.invid;
+
+create view BatchView as
+SELECT Products.name, Products.brand, Products.oftype, Batch.quantity, Batch.invid,
+Morders.venid, Invoice.invenid FROM Invoice JOIN Products JOIN Batch JOIN Morders
+ON Invoice.invid = Morders.invid AND Invoice.invid = Batch.invid AND Products.pdid = Batch.pdid
+
+
+--Catrgory Head
+create view InventoryViewCat as
+SELECT Inventory.invenid, Inventory.hno, Inventory.street, Inventory.district,
+Inventory.city, Inventory.state, Inventory.pincode, Employee.eid FROM Inventory JOIN
+Manager JOIN Supervision JOIN Employee ON Inventory.invenid = Manager.invenid AND Manager.meid = Supervision.meid AND
+Supervision.eid = Employee.eid;
+
+create view InInventoryViewCat as
+SELECT DISTINCT InInventory.pdid, Products.name, Products.brand, InInventory.quantity, Employee.eid
+FROM Products JOIN InInventory JOIN Inventory JOIN Manager JOIN Supervision JOIN Employee JOIN CatHead ON
+InInventory.pdid = Products.pdid AND Inventory.invenid = InInventory.invenid AND Manager.invenid = Inventory.invenid
+AND Manager.meid = Supervision.meid AND Supervision.eid = Employee.eid AND Employee.eid = CatHead.cheid AND
+Products.catid = CatHead.catid;
+
+create view EmployeeUnderCat as
+SELECT E1.eid, E1.fname, E1.lname, E1.phone, E1.age, E1.salary, S1.superviser_eid
+FROM Employee E1 JOIN Supervisor S1 ON E1.eid = S1.supervisee_eid;
+
+create view ProductsUnderCat as
+SELECT DISTINCT Products.pdid, Products.catid, Products.name, Products.brand, Products.images,
+Products.oftype, Products.costPrice, Products.sellingPrice, Products.discount, Products.rating,
+CatHead.cheid FROM Products JOIN CatHead ON Products.catid = CatHead.catid;
+
+--DeliveryPerson
+create view Shippings as
+SELECT D.cordid, C.dateoforderplaced, C.dateoforderdelivery, C.orderstatus, C.totalCost, U.uid,
+U.fname, U.lname, U.phone, U.email, U.hno, U.street, U.district, U.city, U.state, U.pincode, D.deid
+FROM DeliveryPerson D JOIN Corders C JOIN Customer U ON D.cordid = C.cordid AND C.uid = U.uid
+ORDER BY C.orderstatus='0'
+
+
+--Worker
+create view InventoryViewWork as
+SELECT DISTINCT Inventory.invenid, Inventory.hno, Inventory.street, Inventory.district, Inventory.city,
+Inventory.state, Inventory.pincode, Employee.eid FROM Inventory JOIN Manager JOIN Supervision JOIN Employee JOIN Supervisor JOIN
+CatHead ON Employee.eid = Supervisor.supervisee_eid AND Supervisor.superviser_eid = CatHead.cheid AND
+CatHead.cheid = Supervision.eid AND Supervision.meid = Manager.meid AND Inventory.invenid = Manager.invenid;
+
+create view InInventoryViewWork as
+SELECT DISTINCT InInventory.pdid, Products.name, Products.brand, InInventory.quantity, Employee.eid
+FROM Products JOIN InInventory JOIN Inventory JOIN Manager JOIN Supervision JOIN Employee JOIN
+CatHead JOIN Supervisor ON InInventory.pdid = Products.pdid AND Inventory.invenid = InInventory.invenid AND
+Manager.invenid = Inventory.invenid AND Manager.meid = Supervision.meid AND
+Supervision.eid = CatHead.cheid AND CatHead.cheid = Supervisor.superviser_eid AND
+Supervisor.supervisee_eid = Employee.eid AND Products.catid = CatHead.catid;
+
+create view ProductsUnderWork as
+SELECT DISTINCT Products.pdid, Products.catid, Products.name, Products.brand, Products.images,
+Products.oftype, Products.costPrice, Products.sellingPrice, Products.discount, Products.rating,
+Employee.eid FROM Products JOIN CatHead JOIN Supervisor JOIN Employee ON
+Products.catid = CatHead.catid AND CatHead.cheid = Supervisor.superviser_eid AND
+Supervisor.supervisee_eid = Employee.eid;
+
+--Store
+create view CartView as
+SELECT Cart.pdid, Cart.quantity, Cart.subtotal, Cart.attr, Cart.placed, Products.name,
+Products.sellingPrice, Products.catid, Cart.ordid FROM Cart JOIN Products ON Cart.pdid = Products.pdid
+WHERE Cart.placed = 0;
+
+
+--user
+create view InCartView as
+SELECT Cart.pdid, Cart.quantity, Cart.subtotal, Products.catid,
+Products.name, Products.sellingPrice, Cart.ordid
+FROM Cart JOIN Products ON Cart.pdid = Products.pdid
+WHERE Cart.placed = 1;
+
+
+create view OrderView as
+SELECT Cart.quantity, Cart.subtotal, Products.name,
+Products.sellingPrice, Cart.ordid
+FROM Cart JOIN Products ON Cart.pdid = Products.pdid
+WHERE Cart.placed = 0;
+
+
+
+
+
+--Grants
+CREATE USER 'Customer' IDENTIFIED BY 'Root#1234';
+CREATE USER 'Manager' IDENTIFIED BY 'Root#1234';
+CREATE USER 'CatHead' IDENTIFIED BY 'Root#1234';
+CREATE USER 'DeliveryPerson' IDENTIFIED BY 'Root#1234';
+CREATE USER 'Worker' IDENTIFIED BY 'Root#1234';
+
+--Inventory
+GRANT SELECT
+ON store.Inventory TO 'Manager';
+
+--Inventory
+GRANT ALL PRIVILEGES
+ON store.InInventory TO 'Manager';
+
+--Products
+GRANT UPDATE, SELECT
+ON store.Products TO 'Worker';
+
+GRANT ALL
+ON store.Products TO 'CatHead';
+
+GRANT SELECT
+ON store.Products TO 'Customer';
+
+--Clothes
+GRANT ALL
+ON store.Clothes TO 'CatHead';
+
+GRANT SELECT
+ON store.Clothes TO 'Customer';
+
+--Footwear
+GRANT ALL
+ON store.Footwears TO 'CatHead';
+
+GRANT SELECT
+ON store.Footwears TO 'Customer';
+
+--Eappliances
+GRANT ALL
+ON store.Eappliances TO 'CatHead';
+
+GRANT SELECT
+ON store.Eappliances TO 'Customer';
+
+
+--Customer
+GRANT SELECT, UPDATE
+ON store.Customer TO 'Customer';
+
+--Manager
+GRANT SELECT, UPDATE
+ON store.Manager TO 'Manager';
+
+--Emploeee
+GRANT ALL
+ON store.Employee TO 'Manager';
+
+GRANT ALL
+ON store.Employee TO 'CatHead';
+
+GRANT SELECT, UPDATE
+ON store.Employee TO 'DeliveryPerson';
+
+GRANT SELECT, UPDATE
+ON store.Employee TO 'Worker';
+
+--DeliveryPerson
+GRANT SELECT
+ON store.DeliveryPerson TO 'DeliveryPerson';
+
+--Worker
+GRANT SELECT, INSERT, DELETE
+ON store.Worker TO 'CatHead';
+
+--Corders
+GRANT SELECT, UPDATE
+ON store.Corders TO 'DeliveryPerson';
+
+GRANT SELECT, INSERT
+ON store.Corders TO 'Customer';
+
+
+--Morders
+GRANT SELECT, INSERT
+ON store.Morders TO 'Manager';
+
+--Vendor
+GRANT SELECT
+ON store.Vendor TO 'Manager';
+
+--Transactions
+GRANT SELECT, INSERT, DELETE
+ON store.Transactions TO 'Customer';
+
+--Cart
+GRANT ALL
+ON store.Cart TO 'Customer';
+
+--Views
+GRANT SELECT, INSERT
+ON store.Views TO 'Customer';
+
+--Distributes
+GRANT SELECT, INSERT
+ON store.Distributes TO 'Manager';
+
+--Batch
+GRANT SELECT, INSERT
+ON store.Batch TO 'Manager';
+
+--Invoice
+GRANT SELECT, INSERT
+ON store.Invoice TO 'Manager';
+
+--login
+GRANT SELECT
+ON store.login TO 'Customer', 'Manager', 'DeliveryPerson', 'Worker', 'CatHead';
+
+--Supervisor
+GRANT SELECT, INSERT
+ON store.Supervisor TO 'CatHead';
+
+--Supervision
+GRANT SELECT, INSERT
+ON store.Supervision TO 'Manager';
+
+
+--CatHead
+GRANT SELECT, INSERT, DELETE
+ON store.CatHead TO 'Manager';
+
+GRANT SELECT
+ON store.CatHead TO 'CatHead';
+
+--Category
+GRANT SELECT
+ON store.Category TO 'CatHead', 'Worker', 'Customer';
+
+-- GRANTS ON VIEWS
+--BatchView
+GRANT SELECT
+ON store.BatchView TO 'Manager';
+
+--CartView
+GRANT SELECT
+ON store.CartView TO 'Customer';
+
+--EmployeeUnderCat
+GRANT SELECT
+ON store.EmployeeUnderCat TO 'CatHead';
+
+--InCartView
+GRANT SELECT
+ON store.InCartView TO 'Customer';
+
+--InInventoryViewCat
+GRANT SELECT
+ON store.InInventoryViewCat TO 'CatHead';
+
+--InInventoryViewMan
+GRANT SELECT
+ON store.InInventoryViewMan TO 'Manager';
+
+--InInventoryViewWork
+GRANT SELECT
+ON store.InInventoryViewWork TO 'Worker';
+
+--InventoryViewCat
+GRANT SELECT
+ON store.InventoryViewCat TO 'CatHead';
+
+--InventoryViewWork
+GRANT SELECT
+ON store.InventoryViewWork TO 'Worker';
+
+--InvoiceUnderMan
+GRANT SELECT
+ON store.InvoiceUnderMan TO 'Manager';
+
+--OrderView
+GRANT SELECT
+ON store.OrderView TO 'Customer';
+
+--ProductsUnderCat
+GRANT SELECT
+ON store.ProductsUnderCat TO 'CatHead';
+
+--ProductsUnderWork
+GRANT SELECT
+ON store.ProductsUnderWork TO 'Worker';
+
+--Shippings
+GRANT SELECT
+ON store.Shippings TO 'DeliveryPerson';
+
+--VendorViewMan
+GRANT SELECT
+ON store.VendorViewMan TO 'Manager';
+
+
+
+--QUERRIES
+-- Ques-1:
 select fname, lname from Customer
 where uid in ( select uid from Corders
 				where cordid in (select cordid from Cart
@@ -1212,11 +1567,11 @@ where uid in ( select uid from Corders
 
 -- Ques2
 select * from Employee
-where eid in( select deid from DeliveryPerson , Corders 
+where eid in( select deid from DeliveryPerson , Corders
 				where DeliveryPerson.cordid = Corders.cordid and
                 dateoforderplaced = '2021-07-F01'
                 );
-                
+
 
 
 -- Ques-3:
@@ -1239,10 +1594,10 @@ where venid in ( select venid from Distributes
 									where state = 'Chandigarh'
 								)
 				);
-                
-                
+
+
 -- Ques-6:
-select  email from Employee 
+select  email from Employee
 where speciality = 'Worker';
 
 
@@ -1253,13 +1608,13 @@ select * from SmallFootwears;
 
 
 -- Ques-8:
-select speciality, AVG(salary) as average_salary 
-from Employee 
+select speciality, AVG(salary) as average_salary
+from Employee
 group by speciality;
-								
--- Ques-9            
+
+-- Ques-9
 select fname, lname, phone, Corders.cordid, timstamp  from Customer,Corders,Transactions
-where Customer.uid=Corders.uid and Corders.cordid = Transactions.cordid and ofStatus=false;				
+where Customer.uid=Corders.uid and Corders.cordid = Transactions.cordid and ofStatus=false;
 
 
 -- Ques-10:
@@ -1268,7 +1623,7 @@ where  Batch.pdid = Products.pdid
 group by invid;
 
 
--- Ques-11 
+-- Ques-11
 select tid from Transactions
 where timstamp < '2022-02-15 00:00:00' and paymentmethod = 'UPI';
 

@@ -33,9 +33,7 @@ def execute(query):
 
 
 def fetchCart(loginid):
-    _cart = "SELECT Cart.pdid, Cart.quantity, Cart.subtotal, Cart.attr, Cart.placed, Products.name, " \
-            "Products.sellingPrice, Products.catid FROM Cart JOIN Products ON Cart.pdid = Products.pdid " \
-            "WHERE Cart.ordid = '{}' AND Cart.placed = 0".format(loginid)
+    _cart = "SELECT * FROM CartView WHERE ordid = '{}'".format(loginid)
     cart = execute(_cart)
     cart_total = 0
     for item in cart:
@@ -81,10 +79,7 @@ def orders(oid):
         customer_details = "SELECT * FROM Customer WHERE uid = '{}'".format(uid)
         customer = execute(customer_details)[0]
 
-        _incart = "SELECT Cart.pdid, Cart.quantity, Cart.subtotal," \
-                  "Products.catid, Products.name, Products.sellingPrice " \
-                  "FROM Cart JOIN Products ON Cart.pdid = Products.pdid " \
-                  "WHERE Cart.ordid = '{}' AND Cart.placed = 1".format(oid)
+        _incart = "SELECT * FROM InCartView WHERE ordid = '{}'".format(oid)
         incart = execute(_incart)
 
         cart, cart_total = fetchCart(uid)
@@ -209,10 +204,7 @@ def checkout():
 
         cart, cart_total = fetchCart(loginid)
 
-        _order = "SELECT Cart.quantity, Cart.subtotal, " \
-                 "Products.name, Products.sellingPrice " \
-                 "FROM Cart JOIN Products ON Cart.pdid = Products.pdid " \
-                 "WHERE Cart.ordid = '{}' AND Cart.placed = 0".format(loginid)
+        _order = "SELECT * FROM OrderView WHERE ordid = '{}'".format(loginid)
         order = execute(_order)
 
         if cart == -1 or order == -1:

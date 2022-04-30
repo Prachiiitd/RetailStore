@@ -82,5 +82,3 @@ def contact():
 def faq():
     return render_template('faq.html')
 
-#
-

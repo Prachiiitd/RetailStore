@@ -27,9 +27,7 @@ def execute(query):
 
 
 def fetchCart(loginid):
-    _cart = "SELECT Cart.pdid, Cart.quantity, Cart.subtotal, Cart.attr, Cart.placed, Products.name, " \
-            "Products.sellingPrice, Products.catid FROM Cart JOIN Products ON Cart.pdid = Products.pdid " \
-            "WHERE Cart.ordid = '{}' AND Cart.placed = 0".format(loginid)
+    _cart = "SELECT * FROM CartView WHERE ordid = '{}'".format(loginid)
     cart = execute(_cart)
     cart_total = 0
     for item in cart:
@@ -144,6 +142,9 @@ def clothes():
         loginid, usertype = session['user']
         cart, cart_total = fetchCart(loginid)
 
+        _view = "INSERT INTO Views(uid, catid) VALUES('{}', 1)".format(loginid)
+        execute(_view)
+
         _clothes = "SELECT * FROM Products WHERE catid = 1"
         clothes = execute(_clothes)
 
@@ -161,6 +162,9 @@ def footwears():
         _footwears = "SELECT * FROM Products WHERE catid = 2"
         footwears = execute(_footwears)
 
+        _view = "INSERT INTO Views(uid, catid) VALUES('{}', 2)".format(loginid)
+        execute(_view)
+
         return render_template('footwears.html', Footwears=footwears, Cart=cart, CartTotal=cart_total)
     else:
         return redirect('/auth')
@@ -172,8 +176,11 @@ def eappliances():
         loginid, usertype = session['user']
         cart, cart_total = fetchCart(loginid)
 
-        _eappliances = "SELECT * FROM Products WHERE catid = 3"
+        _eappliances = "SELECT * FROM Pr    oducts WHERE catid = 3"
         eappliances = execute(_eappliances)
+
+        _view = "INSERT INTO Views(uid, catid) VALUES('{}', 3)".format(loginid)
+        execute(_view)
 
         return render_template('eappliances.html', Eappliances=eappliances, Cart=cart, CartTotal=cart_total)
     else:

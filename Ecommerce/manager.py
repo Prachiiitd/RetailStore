@@ -40,16 +40,10 @@ def index():
             _inventory = "SELECT * FROM Inventory WHERE invenid = '{}'".format(managers[0][1])
             inventory = execute(_inventory)
 
-            _ininventory = "SELECT InInventory.pdid, Products.name, Products.brand, InInventory.quantity " \
-                           "FROM InInventory JOIN Products ON InInventory.pdid = Products.pdid " \
-                           "WHERE InInventory.invenid = '{}'".format(managers[0][1])
+            _ininventory = "SELECT * FROM InInventoryViewMan Where invenid = '{}'".format(managers[0][1])
             ininventory = execute(_ininventory)
 
-            _vendors = "SELECT Vendor.venid, Vendor.fname, Vendor.lname, Vendor.email, Vendor.phone, " \
-                       "Vendor.gender, Vendor.hno, Vendor.street, Vendor.district, Vendor.city, " \
-                       "Vendor.state, Vendor.pincode, Distributes.invenid FROM Vendor JOIN Distributes " \
-                       "ON Vendor.venid = Distributes.venid " \
-                       "WHERE Distributes.invenid = '{}'".format(managers[0][1])
+            _vendors = "SELECT * FROM VendorViewMan WHERE invenid = '{}'".format(managers[0][1])
             vendors = execute(_vendors)
 
             _employee = """SELECT E1.eid, E1.fname, E1.lname, E1.phone,  J.job, E1.salary
@@ -166,11 +160,39 @@ def order():
                 quantity = request.form['quantity']
 
                 _quantity = """SELECT quantity FROM InInventory WHERE invenid = '{}' AND pdid = '{}'""".format(invenid, pdid)
-                quantity = int(quantity) + execute(_quantity)[0][0]
+                quant = execute(_quantity)[0][0]
+                quantity = int(quantity) + quant
 
                 query = """UPDATE InInventory SET quantity = '{}'
                             WHERE invenid = '{}' AND pdid = '{}'""".format(quantity, invenid, pdid)
                 res = execute(query)
+
+                _venid = """SELECT venid FROM Vendor 
+                            ORDER BY RAND()
+                            LIMIT 1"""
+                venid = execute(_venid)[0][0]
+
+                _distributes = """INSERT IGNORE INTO Distributes(invenid, venid) VALUES ({}, {})""".format(invenid, venid)
+                distributes = execute(_distributes)
+
+                _invoice = """INSERT INTO Invoice(invenid, statusof, receivedDate, fulfilledDate) VALUES
+                                ('{}', '1', '{}', '{}')""".format(invenid, date.today(), date.today())
+                invoice = execute(_invoice)
+
+                _morders = """INSERT INTO Morders(invid, venid)
+                                SELECT MAX(Invoice.invid) AS invid,'{}' as venid
+                                    FROM Invoice""".format(venid)
+                morders = execute(_morders)
+
+                _invid = """SELECT MAX(Invoice.invid)"""
+                invid = execute(_invid)
+
+                _batch = """INSERT INTO Batch(pdid, invid, quantity) Values 
+                            ({}, (SELECT MAX(Invoice.invid) FROM Invoice), {})""".format(pdid, quant)
+                batch = execute(_batch)
+
+                if res == -1 or quant == -1 or venid == -1 or distributes == -1 or invoice == -1 or morders == -1 or batch == -1 or invid == -1:
+                    return render_template('error-404.html')
 
                 if res == -1:
                     flash('Could not place the order')
@@ -193,15 +215,8 @@ def viewOrder():
 
             _inven = "SELECT * FROM Inventory WHERE invenid = '{}'".format(invenid)
             _ven = "SELECT * FROM Vendor WHERE venid = '{}'".format(venid)
-
-            _invoices = "SELECT Invoice.invid, Invoice.invenid, Invoice.statusof, Invoice.receivedDate, " \
-                        "Invoice.fulfilledDate FROM Invoice JOIN Morders ON Invoice.invid = Morders.invid " \
-                        "WHERE Morders.venid = '{}' AND Invoice.invenid = '{}'".format(venid, invenid)
-
-            _batch = "SELECT Products.name, Products.brand, Products.oftype, Batch.quantity, Batch.invid " \
-                     "FROM Invoice JOIN Products JOIN Batch JOIN Morders ON Invoice.invid = Morders.invid AND " \
-                     "Invoice.invid = Batch.invid AND Products.pdid = Batch.pdid " \
-                     "WHERE Morders.venid = '{}' AND Invoice.invenid = '{}'".format(venid, invenid)
+            _invoices = "SELECT * FROM InvoiceUnderMan WHERE venid = '{}' AND invenid = '{}'".format(venid, invenid)
+            _batch = "SELECT * FROM BatchView WHERE venid = '{}' AND invenid = '{}'".format(venid, invenid)
 
             inven = execute(_inven)
             ven = execute(_ven)

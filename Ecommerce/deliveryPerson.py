@@ -38,11 +38,7 @@ def index():
                        WHERE eid = {}""".format(loginid)
             person = execute(_person)
 
-            _order = """SELECT D.cordid, C.dateoforderplaced, C.dateoforderdelivery, C.orderstatus, C.totalCost, U.uid, 
-            U.fname, U.lname, U.phone, U.email, U.hno, U.street, U.district, U.city, U.state, U.pincode FROM 
-            DeliveryPerson D JOIN Corders C JOIN Customer U ON D.cordid = C.cordid AND C.uid = U.uid  
-            WHERE D.deid = {}
-            ORDER BY C.orderstatus='0'""".format(loginid)
+            _order = """select * from Shippings WHERE deid = {}""".format(loginid)
             order = execute(_order)
 
             if order == -1:

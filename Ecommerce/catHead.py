@@ -39,26 +39,16 @@ def index():
                        WHERE Employee.eid = {}""".format(loginid)
             head = execute(_head)
 
-            _inventory = """SELECT *FROM Inventory JOIN Manager JOIN Supervision JOIN Employee ON
-                            Inventory.invenid = Manager.invenid AND Manager.meid = Supervision.meid AND
-                            Supervision.eid = Employee.eid WHERE Employee.eid = {}""".format(loginid)
+            _inventory = """SELECT * FROM InventoryViewCat WHERE eid = {}""".format(loginid)
             inventory = execute(_inventory)
 
-            _ininventory = """SELECT DISTINCT InInventory.pdid, Products.name, Products.brand, InInventory.quantity 
-                        FROM Products JOIN InInventory JOIN Inventory JOIN Manager JOIN Supervision JOIN Employee JOIN CatHead ON 
-                        InInventory.pdid = Products.pdid AND Inventory.invenid = InInventory.invenid AND Manager.invenid = Inventory.invenid 
-                        AND Manager.meid = Supervision.meid AND Supervision.eid = Employee.eid AND Employee.eid = CatHead.cheid AND Products.catid = CatHead.catid
-                        WHERE Employee.eid = {}""".format(loginid)
+            _ininventory = """SELECT DISTINCT * FROM InInventoryViewCat WHERE eid = {}""".format(loginid)
             ininventory = execute(_ininventory)
 
-            _employee = """SELECT E1.eid, E1.fname, E1.lname, E1.phone, E1.age, E1.salary
-                                        FROM Employee E1 JOIN Supervisor S1 ON E1.eid = S1.supervisee_eid
-                                        WHERE S1.superviser_eid = {}""".format(loginid)
-
+            _employee = """SELECT *FROM EmployeeUnderCat WHERE superviser_eid = {}""".format(loginid)
             employees = execute(_employee)
 
-            _products = """SELECT DISTINCT * FROM Products JOIN CatHead ON  Products.catid = CatHead.catid 
-                            WHERE CatHead.cheid = {}""".format(loginid)
+            _products = """SELECT * FROM ProductsUnderCat cheid = {}""".format(loginid)
             products = execute(_products)
 
             return render_template('categoryHead.html', CatHead=head[0], InInventory=ininventory,
@@ -160,7 +150,7 @@ def addEmployee():
                 return render_template("error-404.html")
 
             query = """INSERT INTO Supervisor (superviser_eid, supervisee_eid)
-                        SELECT SELECT MAX(Employee.eid) AS supervisee_eid, CatHead.cheid as superviser_eid
+                        SELECT MAX(Employee.eid) AS supervisee_eid, CatHead.cheid as superviser_eid
                         FROM Employee, CatHead
                         WHERE CatHead.cheid = '{}'""".format(loginid)
             res2 = execute(query)
@@ -259,7 +249,7 @@ def addProduct():
             else:
                 mfgDate = request.form['mfg']
                 quantity = request.form['quantity']
-                query2 = """INSERT INTO Eappliances (pdid, mfgDate, quantity) VALUES 
+                query2 = """INSERT INTO Eappliances (pdid, mfgDate, quantity) VALUES
                             ('{}', '{}', '{}')""".format(pdid, mfgDate, quantity)
                 res = execute(query2)
                 print("hi5")
@@ -303,6 +293,7 @@ def deleteProduct():
             pdid = request.form['pdid']
             query = "DELETE FROM Products WHERE pdid = {}".format(pdid)
             res = execute(query)
+
             if res == -1:
                 flash('Could not delete the product')
             else:

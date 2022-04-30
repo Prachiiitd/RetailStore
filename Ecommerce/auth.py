@@ -74,30 +74,3 @@ def contact():
 @auth.route('/faq')
 def faq():
     return render_template('faq.html')
-
-
-#
-# elif usertype == 'Manager':
-#              query = "SELECT * FROM Manager WHERE mid = '{}'".format(loginid)
-#              man = execute(query)
-#              print(man)
-#
-#          elif usertype == 'Employee':
-#              emp_type = None
-#              query = "SELECT * FROM Employee WHERE eid = '{}'".format(loginid)
-#              emp = execute(query)
-#
-#              if execute("SELECT COUNT(*) FROM CatHead WHERE cheid = {}".format(loginid))[0][0] != 0:
-#                  emp_type = 'CatHead'
-#                  print(emp_type)
-#
-#              elif execute("SELECT COUNT(*) FROM Worker WHERE weid = {}".format(loginid))[0][0] != 0:
-#                  emp_type = 'Worker'
-#                  print(emp_type)
-#
-#              elif execute("SELECT  COUNT(*) FROM DeliveryPerson WHERE deid = {}".format(loginid))[0][0] != 0:
-#                  emp_type = 'DeliveryPerson'
-#                  print(emp_type)
-#
-#              print(emp)
-#              session['user'] = emp_type
