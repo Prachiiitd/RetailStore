@@ -303,6 +303,16 @@ primary key (loginID,usertype)
 
 
 -- Triggers Implementation
+DELIMITER $$
+CREATE TRIGGER InInventorypr
+BEFORE Update 
+ON InInventory
+FOR EACH ROW
+BEGIN
+  if (NEW.quantity < 10) THEN 
+	 set NEW.quantity = NEW.quantity + 15;
+  END IF;
+END$$
 
 create  trigger doDiscount
 before insert on Products
