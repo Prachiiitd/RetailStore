@@ -48,7 +48,7 @@ def index():
             _employee = """SELECT *FROM EmployeeUnderCat WHERE superviser_eid = {}""".format(loginid)
             employees = execute(_employee)
 
-            _products = """SELECT * FROM ProductsUnderCat cheid = {}""".format(loginid)
+            _products = """SELECT * FROM ProductsUnderCat WHERE cheid = {}""".format(loginid)
             products = execute(_products)
 
             return render_template('categoryHead.html', CatHead=head[0], InInventory=ininventory,
